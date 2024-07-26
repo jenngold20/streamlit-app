@@ -22,6 +22,10 @@ contexto = (
 
 model = genai.GenerativeModel('gemini-1.0-pro')
 
+def consultaDumbledore(contexto, consulta):
+    prompt = f"{contexto}\n\nConsulta: {consulta}"
+    respuesta_IA = model.generate_content(prompt)  # Asegúrate de que este método exista
+    return respuesta_IA.text
 
 
 # Configuración de la página
@@ -337,33 +341,17 @@ def show_name_generator():
 
 
 # Función para mostrar la página de consulta con Dumbledore
-# Define una función para mostrar la página de consulta con Dumbledore
 def show_dumbledore():
     st.header("Consulta con Dumbledore")
     st.markdown("""
     En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
     """)
-    
-    # Espacio de preguntas del usuario
-    st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
-    
     consulta = st.text_area("Ingresa tu consulta:")
-    
-    # Botón para enviar la consulta
     if st.button("Consultar"):
         if consulta:
-            # Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
-            prompt = f"{contexto}\n\nConsulta: {consulta}"
-            try:
-                # Llama al método correcto del modelo para obtener una respuesta
-                respuesta_IA = model.generate_content(prompt)  # Asegúrate de que el método y el parámetro sean correctos
-                
-                st.markdown("***Respuesta de Albus Dumbledore:***")
-                st.write(respuesta_IA)  # Asegúrate de que `respuesta_IA` sea una cadena de texto
-            except AttributeError as e:
-                st.error(f"Error con el modelo: {e}")
-            except Exception as e:
-                st.error(f"Ha ocurrido un error: {e}")
+            respuesta_IA = consultaDumbledore(contexto, consulta)
+            st.markdown("***Respuesta de Albus Dumbledore:***")
+            st.write(respuesta_IA)
         else:
             st.write("Por favor, ingresa una consulta.")
 
