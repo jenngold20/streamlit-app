@@ -136,7 +136,7 @@ def footer():
         position: fixed;
         bottom: 0;
         width: 100%;
-        background-color: #f5f5f5;
+        background-color: #f9f3e8;
         text-align: center;
         padding: 10px;
         font-family: 'Garamond', serif;
@@ -146,7 +146,7 @@ def footer():
     }
     </style>
     <div class="footer">
-        Creado por Jennifer Goldfeld 2024 | Prompt Engineer para programadores Coderhouse
+        Creado por Jennifer Goldfeld ❣ | Prompt Engineer para programadores | Coderhouse 2024
     </div>
     """, unsafe_allow_html=True)
     
