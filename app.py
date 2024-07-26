@@ -55,7 +55,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -193,9 +193,6 @@ def show_trivia():
             else:
                 st.error("Incorrecto. La respuesta correcta es: " + q["answer"])
             st.write("Tu puntuación actual es: " + str(score) + "/" + str(len(questions)))
-
-# Añadir la opción al menú de navegación
-pages.append("Trivia de Harry Potter")
 
 # Mostrar la página seleccionada
 if page == "Inicio":
