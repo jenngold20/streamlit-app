@@ -4,8 +4,41 @@ import pandas as pd
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
 
+# Estilo CSS para la aplicación
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f4f4f9;
+        color: #444;
+    }
+    .stButton>button {
+        color: #ffffff;
+        background-color: #7f5af0;
+    }
+    .stSelectbox>div {
+        color: #7f5af0;
+    }
+    .stMarkdown {
+        color: #7f5af0;
+    }
+    .header {
+        background-image: url('https://www.hp-lexicon.org/wp-content/uploads/2015/08/HogwartsCoA.png');
+        background-size: cover;
+        background-position: center;
+        padding: 50px;
+        text-align: center;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Imagen de encabezado
+st.markdown('<div class="header">Mundo Mágico de Harry Potter</div>', unsafe_allow_html=True)
+
 # Título y descripción de la aplicación
-st.title("Mundo Mágico de Harry Potter")
+st.title("Bienvenido")
 st.markdown("""
 Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, descubre personajes destacados, eventos importantes, y predicciones sobre el futuro de nuestros personajes favoritos.
 """)
