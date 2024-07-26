@@ -219,14 +219,25 @@ def show_trivia():
         {"question": "¿Cuál es el patronus de Hermione?", "options": ["Nutria", "Ciervo", "Lobo", "Gato"], "answer": "Nutria"}
     ]
 
+    # Inicializar puntos
+    if 'score' not in st.session_state:
+        st.session_state.score = 0
+        st.session_state.answered_questions = 0
+
     for idx, q in enumerate(trivia_questions):
-        st.write(f"**Pregunta:** {q['question']}")
-        answer = st.radio(f"Elige una opción para la pregunta {idx+1}:", q['options'], key=f"radio_{idx}")
-        if st.button(f"Enviar Respuesta para la pregunta {idx+1}"):
+        st.write(f"**Pregunta {idx + 1}:** {q['question']}")
+        answer = st.radio(f"Elige una opción para la pregunta {idx + 1}:", q['options'], key=f"radio_{idx}")
+        if st.button(f"Enviar Respuesta para la pregunta {idx + 1}", key=f"button_{idx}"):
             if answer == q['answer']:
+                st.session_state.score += 1
                 st.write("¡Correcto!")
             else:
                 st.write("Incorrecto. La respuesta correcta es:", q['answer'])
+            st.session_state.answered_questions += 1
+
+    # Mostrar puntuación final si se han respondido todas las preguntas
+    if st.session_state.answered_questions == len(trivia_questions):
+        st.write(f"Tu puntuación final es: {st.session_state.score}/{len(trivia_questions)}")
 
 # Función para mostrar generador de hechizos aleatorios
 def show_spell_generator():
