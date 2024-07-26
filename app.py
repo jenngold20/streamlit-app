@@ -125,7 +125,7 @@ st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
 
 # Barra lateral de navegación
 st.sidebar.title("Descubre el mundo mágico")
-pages = ["Inicio", "Consulta con Dumbledore", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
+pages = ["Inicio", "Consulta con Dumbledore", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos", "Cómo funciona"]
 page = st.sidebar.selectbox("Explora:", pages)
 
 #  Footer
@@ -399,6 +399,84 @@ def show_name_generator():
         st.write(f"**Nombre Mágico:** {name}")
     footer()      
 
+
+############## Cómo funciona ################## 
+def show_how_it_works():
+    st.header("Cómo Funciona")
+    st.markdown("""
+    En **Mundo Mágico de Harry Potter**, queremos que tu experiencia sea tan mágica y encantadora como el mundo que amamos. Aquí te explicamos cómo funcionan las principales características de nuestra aplicación:
+
+    ### Características Claves
+
+    - **Casas de Hogwarts**:
+      Descubre cuál es tu casa ideal respondiendo a una serie de preguntas sobre tus preferencias y personalidad. Nuestro sistema te asignará a una de las cuatro casas: Gryffindor, Ravenclaw, Hufflepuff o Slytherin. ¡Prepárate para conocer tu verdadera casa!
+
+    - **Personajes Destacados**:
+      Explora perfiles detallados de los personajes más importantes de la saga. Desde Harry Potter hasta Voldemort, cada perfil incluye biografía, curiosidades y su impacto en la historia mágica.
+
+    - **Encuesta de Popularidad**:
+      Vota por tu personaje favorito y ve los resultados en tiempo real. Participa en la encuesta y contribuye a conocer quién es el personaje más querido por los fans.
+
+    - **Trivia de Harry Potter**:
+      Responde a una serie de preguntas desafiantes para poner a prueba tu conocimiento sobre el universo de Harry Potter. Cada respuesta correcta te acerca a convertirte en un verdadero experto.
+
+    - **Generador de Hechizos**:
+      Crea hechizos al azar con efectos mágicos variados. Descubre cómo funcionan y qué magia puedes invocar con cada hechizo generado.
+
+    - **Generador de Nombres Mágicos**:
+      Introduce tus preferencias y deja que nuestro generador te sugiera un nombre mágico único para tus personajes. Ideal para juegos de rol o para dar vida a tus creaciones.
+
+    - **Consejos de Dumbledore**:
+      Habla con Albus Dumbledore, quien te ofrecerá consejos sabios y orientaciones sobre tu aventura mágica. Pregunta lo que desees y recibe respuestas llenas de sabiduría.
+
+    ### Conversación con Dumbledore
+
+    La funcionalidad de **Consejos de Dumbledore** permite interactuar con uno de los personajes más venerados de la saga. Aquí te explicamos cómo funciona:
+
+    - **Interacción**:
+      Puedes hablar con Dumbledore a través de un chat interactivo en la aplicación. Simplemente escribe tu pregunta o inquietud en el campo de texto proporcionado. Puede ser cualquier cosa relacionada con el mundo mágico, consejos sobre cómo enfrentar desafíos o simplemente una consulta sobre temas generales.
+
+    - **Respuesta**:
+      Dumbledore te responderá con consejos basados en su vasta experiencia y sabiduría. Las respuestas se generan utilizando un modelo de inteligencia artificial que imita el estilo y la sabiduría del personaje. Aunque las respuestas son generadas automáticamente, se esfuerzan por captar el tono y la profundidad del gran director de Hogwarts.
+
+    - **Ejemplos de Preguntas**:
+      Puedes preguntar sobre:
+        - Estrategias para enfrentar un problema específico.
+        - Reflexiones sobre la vida y la magia.
+        - Consejos sobre cómo mejorar tus habilidades en el mundo mágico.
+        - Información sobre eventos históricos en el universo de Harry Potter.
+
+    - **Qué Esperar**:
+      Las respuestas de Dumbledore están diseñadas para ser inspiradoras y útiles. A menudo incluyen citas famosas del personaje y reflexiones profundas. Recuerda que la experiencia busca ofrecerte una interacción enriquecedora, pero no sustituye el consejo real.
+
+    - **Cómo Utilizarlo**:
+      Para interactuar con Dumbledore, simplemente accede a la sección de "Consejos de Dumbledore" en el menú principal de la aplicación. Escribe tu mensaje en el campo de texto y presiona "Enviar". La respuesta aparecerá en la pantalla en unos momentos.
+
+    ### Cómo Realizar Solicitudes
+
+    - **Interacción con las Funcionalidades**:
+      Navega a través de los menús de nuestra aplicación para acceder a cada funcionalidad. Puedes seleccionar la opción que te interese y seguir las instrucciones en pantalla.
+
+    - **Respuestas a Preguntas y Generación de Contenidos**:
+      En las secciones como Trivia y Generador de Hechizos, simplemente sigue las instrucciones y haz clic en los botones para obtener resultados. En la sección de Consejos de Dumbledore, escribe tu pregunta en el campo de texto y haz clic en "Enviar".
+
+    ### Qué Esperar Como Resultado
+
+    - **Resultados Interactivos y Divertidos**:
+      Cada funcionalidad está diseñada para ofrecerte una experiencia inmersiva y divertida. Desde los resultados de tu casa en Hogwarts hasta las respuestas de Dumbledore, cada interacción está pensada para que disfrutes al máximo.
+
+    - **Experiencia Personalizada**:
+      Recibirás recomendaciones y resultados basados en tus elecciones y respuestas, haciendo que tu experiencia sea única y adaptada a ti.
+
+    - **Contenido Enriquecedor**:
+      Cada sección proporciona información y contenido valioso sobre el mundo de Harry Potter, ayudándote a aprender más sobre la saga y disfrutar de nuevas formas de magia.
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactar con nuestro equipo de soporte a través de la sección de ayuda en la aplicación.
+
+    ¡Disfruta de tu aventura mágica con nosotros!
+    """)
+footer() 
+
 ############## Mostrar páginas seleccionadas ################## 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -417,3 +495,5 @@ elif page == "Generador de Nombres Mágicos":
     show_name_generator()
 elif page == "Consulta con Dumbledore":
     show_dumbledore()
+elif page == "Cómo funciona":
+    show_how_it_works()
