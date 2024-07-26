@@ -56,7 +56,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -135,21 +135,6 @@ def show_events():
 
     events_df = pd.DataFrame(events_data)
     st.dataframe(events_df)
-
-# Función para mostrar predicciones futuras
-def show_predictions():
-    st.header("Predicciones Futuras")
-    st.markdown("""
-    ¿Qué les depara el futuro a nuestros personajes favoritos? Aquí te mostramos algunas predicciones sobre el mundo mágico.
-    """)
-
-    st.markdown("""
-    - **Harry Potter:** Seguirá luchando por la justicia y la igualdad en el mundo mágico.
-    - **Hermione Granger:** Posiblemente se convierta en Ministra de Magia, liderando reformas importantes.
-    - **Ron Weasley:** Con su habilidad táctica, podría abrir su propia tienda de artículos mágicos exitosamente.
-    - **Neville Longbottom:** Continuará su carrera en la enseñanza, inspirando a nuevas generaciones de magos y brujas.
-    - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
-    """)
 
 # Función para mostrar la encuesta de popularidad
 def show_poll():
@@ -253,8 +238,6 @@ elif page == "Personajes Destacados":
     show_characters()
 elif page == "Eventos Importantes":
     show_events()
-elif page == "Predicciones Futuras":
-    show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
 elif page == "Trivia de Harry Potter":
