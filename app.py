@@ -22,7 +22,7 @@ st.markdown("""
         color: #7f5af0;
     }
     .header {
-        background-image: url('https://www.hp-lexicon.org/wp-content/uploads/2015/08/HogwartsCoA.png');
+        background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
         background-size: cover;
         background-position: center;
         padding: 50px;
