@@ -169,6 +169,34 @@ def show_poll():
     for character, count in votes.items():
         st.write(f"{character}: {count} votos")
 
+# Función para mostrar el trivia
+def show_trivia():
+    st.header("Trivia de Harry Potter")
+    st.markdown("""
+    ¡Pon a prueba tus conocimientos sobre el mundo mágico de Harry Potter!
+    """)
+
+    questions = [
+        {"question": "¿Cuál es el nombre completo de Harry Potter?", "options": ["Harry James Potter", "Harry John Potter", "Harry Robert Potter"], "answer": "Harry James Potter"},
+        {"question": "¿Quién es el director de Hogwarts al inicio de la saga?", "options": ["Albus Dumbledore", "Severus Snape", "Minerva McGonagall"], "answer": "Albus Dumbledore"},
+        {"question": "¿Qué hechizo se usa para desarmar a un oponente?", "options": ["Expelliarmus", "Avada Kedavra", "Stupefy"], "answer": "Expelliarmus"}
+    ]
+
+    score = 0
+    for q in questions:
+        st.subheader(q["question"])
+        selected_option = st.radio("Elige una opción:", q["options"])
+        if st.button("Enviar Respuesta", key=q["question"]):
+            if selected_option == q["answer"]:
+                st.success("¡Correcto!")
+                score += 1
+            else:
+                st.error("Incorrecto. La respuesta correcta es: " + q["answer"])
+            st.write("Tu puntuación actual es: " + str(score) + "/" + str(len(questions)))
+
+# Añadir la opción al menú de navegación
+pages.append("Trivia de Harry Potter")
+
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -182,3 +210,5 @@ elif page == "Predicciones Futuras":
     show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
+elif page == "Trivia de Harry Potter":
+    show_trivia()
