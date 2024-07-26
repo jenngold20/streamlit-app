@@ -204,7 +204,7 @@ def show_survey():
     if st.button("Votar"):
         st.write(f"¡Gracias por votar por {vote}!")
 
-# Función para mostrar trivia de Harry Potter
+#Sector Trivia 
 def show_trivia():
     st.header("Trivia de Harry Potter")
     st.markdown("""
@@ -212,14 +212,17 @@ def show_trivia():
     """)
 
     trivia_questions = [
-        {"question": "¿Cuál es el nombre de la varita de Harry Potter?", "options": ["Elder Wand", "Elder Wand", "Deathstick", "The Wand of Destiny"], "answer": "Elder Wand"},
-        {"question": "¿Qué criatura mágica puede cambiar de forma para adaptarse a los miedos de las personas?", "options": ["Boggart", "Dementor", "Hippogriff", "Thestral"], "answer": "Boggart"}
+        {"question": "¿Cuál es el nombre de la varita de Harry Potter?", "options": ["Elder Wand", "Deathstick", "The Wand of Destiny"], "answer": "Elder Wand"},
+        {"question": "¿Qué criatura mágica puede cambiar de forma para adaptarse a los miedos de las personas?", "options": ["Boggart", "Dementor", "Hippogriff", "Thestral"], "answer": "Boggart"},
+        {"question": "¿Cómo se llama la poción que permite cambiar de apariencia?", "options": ["Poción Multijugos", "Felix Felicis", "Veritaserum", "Amortentia"], "answer": "Poción Multijugos"},
+        {"question": "¿Quién fue el fundador de Slytherin?", "options": ["Godric Gryffindor", "Helga Hufflepuff", "Rowena Ravenclaw", "Salazar Slytherin"], "answer": "Salazar Slytherin"},
+        {"question": "¿Cuál es el patronus de Hermione?", "options": ["Nutria", "Ciervo", "Lobo", "Gato"], "answer": "Nutria"}
     ]
 
-    for q in trivia_questions:
+    for idx, q in enumerate(trivia_questions):
         st.write(f"**Pregunta:** {q['question']}")
-        answer = st.radio("Elige una opción:", q['options'])
-        if st.button("Enviar Respuesta"):
+        answer = st.radio(f"Elige una opción para la pregunta {idx+1}:", q['options'], key=f"radio_{idx}")
+        if st.button(f"Enviar Respuesta para la pregunta {idx+1}"):
             if answer == q['answer']:
                 st.write("¡Correcto!")
             else:
