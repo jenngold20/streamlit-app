@@ -6,23 +6,23 @@ st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":spark
 
 # Estilo CSS para la aplicación
 st.markdown("""
-    <style>
+ <style>
     .main {
-        background-color: #f4f4f9;
-        color: #444;
+        background-color: #f9f3e8; /* Fondo claro y cálido */
+        color: #333333; /* Texto oscuro para buen contraste */
     }
     .stButton>button {
         color: #ffffff;
-        background-color: #7f5af0;
+        background-color: #8a2b8d; /* Color llamativo para botones */
     }
     .stSelectbox>div {
-        color: #7f5af0;
+        color: #8a2b8d; /* Color para selectbox que coincide con el botón */
     }
     .stMarkdown {
-        color: #7f5af0;
+        color: #8a2b8d; /* Color para texto en markdown */
     }
     .header {
-        background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
+       background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
         background-size: cover;
         background-position: center;
         padding: 50px;
@@ -30,8 +30,18 @@ st.markdown("""
         color: #ffffff;
         font-size: 30px;
         font-weight: bold;
+        border-bottom: 5px solid #8a2b8d; /* Línea inferior para el encabezado */
+    }
+    .sidebar .sidebar-content {
+        background-color: #8a2b8d; /* Fondo de la barra lateral */
+        color: #ffffff;
+    }
+    .sidebar .sidebar-content .stButton>button {
+        color: #ffffff;
+        background-color: #5d1e5a; /* Color para los botones de la barra lateral */
     }
     </style>
+        
     """, unsafe_allow_html=True)
 
 # Imagen de encabezado
