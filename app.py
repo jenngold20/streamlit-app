@@ -191,6 +191,16 @@ def show_characters():
         st.write(characters_data["Descripción"][i])
         st.markdown("---")  # Separador entre personajes
 
+# Inicializar el estado de la sesión para los votos
+if 'votes' not in st.session_state:
+    st.session_state.votes = {
+        "Harry Potter": 0,
+        "Hermione Granger": 0,
+        "Ron Weasley": 0,
+        "Albus Dumbledore": 0,
+        "Severus Snape": 0
+    }
+
 # Función para mostrar encuesta de popularidad
 def show_survey():
     st.header("Encuesta de Popularidad")
@@ -202,7 +212,14 @@ def show_survey():
     vote = st.radio("¿Cuál es tu personaje favorito?", characters)
 
     if st.button("Votar"):
+        # Incrementar el contador de votos para el personaje seleccionado
+        st.session_state.votes[vote] += 1
         st.write(f"¡Gracias por votar por {vote}!")
+
+    # Mostrar el conteo de votos
+    st.markdown("### Resultados de la Encuesta")
+    for character, count in st.session_state.votes.items():
+        st.write(f"{character}: {count} votos")
 
 #Sector Trivia 
 def show_trivia():
