@@ -133,15 +133,6 @@ st.markdown('<div class="header">Mundo Mágico de Harry Potter</div>', unsafe_al
 
 # Título y descripción de la aplicación
 st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
-st.markdown("""
-Explora el fascinante mundo de Harry Potter como nunca antes. Desde descubrir las casas de Hogwarts hasta conocer a los personajes más icónicos y probar tu conocimiento con nuestra trivia, esta aplicación está diseñada para todos los fanáticos de la saga mágica.
-
-Aquí puedes:
-- **Conocer las casas de Hogwarts**: Descubre qué casa te representa.
-- **Explorar personajes destacados**: Conoce más sobre los héroes y villanos de la saga.
-- **Participar en encuestas y trivias**: Pon a prueba tu conocimiento sobre el mundo mágico.
-- **Generar hechizos y nombres mágicos**: ¡Crea tu propia magia!
-""")
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
