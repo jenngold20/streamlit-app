@@ -134,6 +134,7 @@ st.markdown('<div class="header">Mundo Mágico de Harry Potter</div>', unsafe_al
 # Título y descripción de la aplicación
 st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
 
+
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
 pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos", "Consulta con Dumbledore"]
@@ -368,16 +369,22 @@ def show_dumbledore():
     st.markdown("""
     En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
     """)
-
-    question = st.text_input("Escribe tu pregunta para Dumbledore:")
-
+    
+    # Espacio de preguntas del usuario
+    st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
+    
+    consulta = st.text_area("Ingresa tu consulta:")
+    
+    # Botón para enviar la consulta
     if st.button("Consultar"):
-        if question:
-            # Consulta al modelo generativo de IA con la pregunta
-            response = model.generate(prompt=f"{contexto} Pregunta: {question}")
-            st.write(f"**Respuesta de Dumbledore:** {response}")
+        if consulta:
+            # Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
+            prompt = f"{contexto}\n\nConsulta: {consulta}"
+            respuesta_IA = model.generate(prompt=prompt)
+            st.markdown("***Respuesta de Albus Dumbledore:***")
+            st.write(respuesta_IA)
         else:
-            st.write("Por favor, escribe una pregunta.")
+            st.write("Por favor, ingresa una consulta.")
 
 
 # Mostrar la página seleccionada
