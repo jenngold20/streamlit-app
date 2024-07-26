@@ -113,9 +113,15 @@ st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
 st.markdown('<div class="header">Mundo Mágico de Harry Potter</div>', unsafe_allow_html=True)
 
 # Título y descripción de la aplicación
-st.title("Bienvenido")
+st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
 st.markdown("""
-Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, descubre personajes destacados
+Explora el fascinante mundo de Harry Potter como nunca antes. Desde descubrir las casas de Hogwarts hasta conocer a los personajes más icónicos y probar tu conocimiento con nuestra trivia, esta aplicación está diseñada para todos los fanáticos de la saga mágica.
+
+Aquí puedes:
+- **Conocer las casas de Hogwarts**: Descubre qué casa te representa.
+- **Explorar personajes destacados**: Conoce más sobre los héroes y villanos de la saga.
+- **Participar en encuestas y trivias**: Pon a prueba tu conocimiento sobre el mundo mágico.
+- **Generar hechizos y nombres mágicos**: ¡Crea tu propia magia!
 """)
 
 # Barra lateral de navegación
@@ -127,8 +133,16 @@ page = st.sidebar.selectbox("Selecciona una página:", pages)
 def show_home():
     st.header("Inicio")
     st.markdown("""
-    Sumérgete en el mundo mágico de Harry Potter. Aquí podrás explorar las diferentes casas de Hogwarts, conocer más sobre los personajes más queridos.
+    ¡Bienvenido a la sección de inicio de la aplicación Mundo Mágico de Harry Potter! Aquí te presentamos una visión general de lo que puedes hacer en nuestra aplicación.
+    
+    - **Casas de Hogwarts**: Explora y descubre cuál es tu casa ideal en Hogwarts.
+    - **Personajes Destacados**: Aprende sobre los personajes más importantes de la saga.
+    - **Encuesta de Popularidad**: Vota por tu personaje favorito y consulta los resultados.
+    - **Trivia de Harry Potter**: Responde preguntas para demostrar tu conocimiento sobre el mundo mágico.
+    - **Generador de Hechizos**: Crea hechizos al azar y aprende sobre sus efectos.
+    - **Generador de Nombres Mágicos**: Descubre un nombre mágico único para tus propios personajes.
     """)
+
 
 # Función para mostrar la página de casas de Hogwarts
 def show_houses():
