@@ -2,6 +2,29 @@ import streamlit as st
 import pandas as pd
 import random
 import requests
+from openai import OpenAI
+import sett
+import os
+
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+def obtener_respuesta_dumbledore(pregunta):
+    # Define el prompt para el modelo
+    prompt = f"Imagina que Dumbledore está respondiendo a una pregunta sobre el mundo de Harry Potter. La pregunta es: {pregunta}"
+    
+    # Realiza la solicitud a la API de OpenAI
+    response = client.completions.create(
+        model="gpt-3.5-turbo-instruct",  # Puedes usar otro modelo si lo prefieres
+        prompt=prompt,
+        max_tokens=150,  # Ajusta el número de tokens según tus necesidades
+        temperature=0.7  # Ajusta la creatividad de la respuesta
+    )
+    
+    # Obtén la respuesta del modelo
+    respuesta = response.choices[0].text.strip()
+    
+    return respuesta
 
 
 # Configuración de la página
@@ -58,7 +81,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos", "Consulta a Dumbledore" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -252,6 +275,21 @@ def show_magic_name_generator():
         st.write(f"**Nombre Mágico Generado:** {magic_name}")
 
 
+def show_dumbledore_section():
+    st.header("Consulta a Dumbledore")
+    st.markdown("""
+    En esta sección, puedes hacer preguntas a Dumbledore sobre el mundo de Harry Potter. 
+    Dumbledore te proporcionará respuestas sabias y profundas basadas en su conocimiento.
+    """)
+
+    pregunta = st.text_input("Escribe tu pregunta sobre Harry Potter:")
+    if st.button("Consultar a Dumbledore"):
+        if pregunta:
+            respuesta = obtener_respuesta_dumbledore(pregunta)
+            st.write(f"**Respuesta de Dumbledore:** {respuesta}")
+        else:
+            st.warning("Por favor, ingresa una pregunta.")
+
 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -270,4 +308,5 @@ elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_magic_name_generator()
-
+elif page == "Consulta a Dumbledore":
+    show_dumbledore_section()
