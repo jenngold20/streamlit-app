@@ -138,9 +138,9 @@ st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
 
 
 # Barra lateral de navegación
-st.sidebar.title("Navegación")
+st.sidebar.title("Descubre el mundo mágico")
 pages = ["Inicio", "Consulta con Dumbledore", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
-page = st.sidebar.selectbox("Selecciona una página:", pages)
+page = st.sidebar.selectbox("Explora:", pages)
 
 # Función para mostrar la página de inicio
 def show_home():
