@@ -35,11 +35,11 @@ st.markdown("""
     }
     .sidebar .sidebar-content {
         background-color: #E1C5F7
-        color: #711BB5;
+        color: #8a2b8d;
     }
     .sidebar .sidebar-content .stButton>button {
-        color: #ffffff;
-        background-color: #5d1e5a; /* Color para los botones de la barra lateral */
+        color: #8a2b8d;
+        background-color: #E1C5F7; /* Color para los botones de la barra lateral */
     }
     </style>
         
