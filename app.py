@@ -2,15 +2,17 @@ import streamlit as st
 import pandas as pd
 import random
 import requests
+import google.generativeai as genai
 
 from dotenv import load_dotenv
 import os
 
-# Cargar las variables de entorno
-load_dotenv()
 
-# Obtener la API Key de las variables de entorno
-api_key = os.getenv("GEMINI_API_KEY")
+
+model = genai.GenerativeModel(model_name='gemini-1.5-flash')
+
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
 
