@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import pathlib
-import textwrap
 import google.generativeai as genai
 from IPython.display import display
 from IPython.display import Markdown
@@ -13,10 +11,8 @@ from IPython.display import Markdown
 
 GOOGLE_API_KEY= 'AIzaSyC2kzAGBY1e74SKdz4yE9jLl-qsV3DC0w0'
 
-
 genai.configure(api_key=GOOGLE_API_KEY)
-model= genai.GenerativeModel('gemini-1.0-pro')
-
+model = genai.GenerativeModel('gemini-1.0-pro')
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -72,7 +68,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter con IA","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter con IA", "Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -119,7 +115,7 @@ def show_characters():
             "Director de Hogwarts, uno de los magos más poderosos.",
             "Profesor de Pociones, conocido por su complejidad moral."
         ],
-       "Imagen": [
+        "Imagen": [
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/122be6ec-0db1-4080-bb35-c6ec011bf9d4/Default_Create_an_image_of_Harry_Potter_the_iconic_young_wizar_2.jpg",
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/ef847676-9c6b-428a-b9d6-677511a6f15d/Default_Create_an_image_of_Hermione_Granger_the_brilliant_youn_1.jpg",
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/163c7e3d-1162-419d-b969-de7648ca586f/Default_Create_an_image_of_Ron_Weasley_the_loyal_and_brave_you_0.jpg",
@@ -137,15 +133,17 @@ def show_characters():
 def show_events():
     st.header("Eventos Importantes")
     st.markdown("""
-    Revive algunos de los eventos más importantes que tuvieron lugar en el mundo mágico de Harry Potter.
+    Revive algunos de los eventos más importantes en el universo de Harry Potter.
     """)
 
     events_data = {
-        "Evento": ["La Batalla de Hogwarts", "El Torneo de los Tres Magos", "La Fundación de Hogwarts"],
+        "Evento": ["La Batalla de Hogwarts", "El Torneo de los Tres Magos", "La Caída de Voldemort", "La Profecía"],
+        "Fecha": ["1998", "1994", "1997", "1980"],
         "Descripción": [
-            "La batalla final entre el bien y el mal en la escuela.",
-            "Competencia mágica entre tres escuelas de magia.",
-            "La creación de la escuela de magia más famosa del mundo."
+            "La batalla final entre los magos y Voldemort en Hogwarts.",
+            "Un torneo mágico que reúne a los mejores magos de tres escuelas.",
+            "El momento en que Voldemort finalmente es derrotado.",
+            "La profecía que predice el enfrentamiento entre Harry y Voldemort."
         ]
     }
 
@@ -156,102 +154,69 @@ def show_events():
 def show_predictions():
     st.header("Predicciones Futuras")
     st.markdown("""
-    ¿Qué les depara el futuro a nuestros personajes favoritos? Aquí te mostramos algunas predicciones sobre el mundo mágico.
+    ¿Qué depara el futuro para nuestros personajes favoritos?
     """)
 
-    st.markdown("""
-    - **Harry Potter:** Seguirá luchando por la justicia y la igualdad en el mundo mágico.
-    - **Hermione Granger:** Posiblemente se convierta en Ministra de Magia, liderando reformas importantes.
-    - **Ron Weasley:** Con su habilidad táctica, podría abrir su propia tienda de artículos mágicos exitosamente.
-    - **Neville Longbottom:** Continuará su carrera en la enseñanza, inspirando a nuevas generaciones de magos y brujas.
-    - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
-    """)
+    predictions = [
+        "Harry Potter seguirá defendiendo el mundo mágico de nuevas amenazas.",
+        "Hermione Granger se convertirá en una destacada Ministra de Magia.",
+        "Ron Weasley encontrará la estabilidad en su vida familiar y profesional.",
+        "Albus Dumbledore será recordado como uno de los más grandes magos de todos los tiempos.",
+        "Severus Snape será recordado por sus sacrificios y redención."
+    ]
 
-# Función para mostrar la encuesta de popularidad
-def show_poll():
+    for prediction in predictions:
+        st.markdown(f"- {prediction}")
+
+# Función para la encuesta de popularidad
+def show_survey():
     st.header("Encuesta de Popularidad")
     st.markdown("""
-    ¡Vota por tu personaje favorito de Harry Potter!
+    Participa en nuestra encuesta sobre tus personajes y eventos favoritos.
     """)
-    
+
     characters = ["Harry Potter", "Hermione Granger", "Ron Weasley", "Albus Dumbledore", "Severus Snape"]
-    votes = {char: 0 for char in characters}
-    
     selected_character = st.selectbox("Selecciona tu personaje favorito:", characters)
-    if st.button("Votar"):
-        votes[selected_character] += 1
-        st.success(f"¡Has votado por {selected_character}!")
-    
-    st.write("Resultados de la Encuesta:")
-    for character, count in votes.items():
-        st.write(f"{character}: {count} votos")
-        
-        
-        
+    st.write(f"Has seleccionado: {selected_character}")
 
-def generate_trivia_question():
-    prompt = "Genera una pregunta de trivia sobre Harry Potter con una respuesta correcta. La pregunta debe ser interesante y desafiante."
-    response = model.generate_content(prompt)
-    return response.text
+    events = ["La Batalla de Hogwarts", "El Torneo de los Tres Magos", "La Caída de Voldemort", "La Profecía"]
+    selected_event = st.selectbox("Selecciona tu evento favorito:", events)
+    st.write(f"Has seleccionado: {selected_event}")
 
-def show_trivia_with_ai():
-    st.header("Trivia de Harry Potter Generada por IA")
-    st.markdown("""
-    Descubre preguntas de trivia sobre Harry Potter generadas por inteligencia artificial.
-    """)
+# Función para la trivia de Harry Potter con IA
+def show_trivia():
+    st.header("Trivia de Harry Potter con IA")
 
-    if st.button("Generar Pregunta de Trivia"):
-        trivia_question = generate_trivia_question()
-        st.write(f"**Pregunta de Trivia:** {trivia_question}")
+    prompt = "Genera una pregunta de trivia sobre Harry Potter."
+    response = genai.generate(prompt=prompt, model=model)
+    question = response.text
 
+    st.subheader("Pregunta:")
+    st.write(question)
 
-# Función para mostrar el generador de hechizos
+    answer = st.text_input("Tu respuesta:")
+
+    if st.button("Enviar Respuesta"):
+        st.write("Gracias por tu participación.")
+
+# Función para el generador de hechizos aleatorios
 def show_spell_generator():
     st.header("Generador de Hechizos Aleatorios")
-    st.markdown("""
-    Descubre un hechizo mágico aleatorio cada vez que hagas clic en el botón.
-    """)
 
-    spells = {
-        "Expelliarmus": "Hechizo para desarmar a un oponente.",
-        "Lumos": "Hechizo para iluminar la punta de la varita.",
-        "Avada Kedavra": "Hechizo de la muerte, uno de los Tres Hechizos Imperdonables.",
-        "Accio": "Hechizo para atraer objetos hacia el lanzador.",
-        "Expecto Patronum": "Hechizo para conjurar un Patronus y repeler Dementores."
-    }
+    spells = ["Expelliarmus", "Lumos", "Accio", "Alohomora", "Avada Kedavra"]
+    random_spell = random.choice(spells)
 
-    if st.button("Generar Hechizo"):
-        spell_name = random.choice(list(spells.keys()))
-        spell_description = spells[spell_name]
-        st.write(f"**Hechizo:** {spell_name}")
-        st.write(f"**Descripción:** {spell_description}")
+    st.write(f"Tu hechizo aleatorio es: {random_spell}")
 
-
-# Función para generar nombres mágicos aleatorios
-def generate_magic_name():
-    prefixes = ["Al", "El", "Va", "Ro", "Ma", "Sy", "Ga", "Le", "Di", "Ze"]
-    infixes = ["nar", "mor", "ven", "lor", "ris", "zom", "ral", "tar", "don", "bel"]
-    suffixes = ["ius", "or", "en", "ar", "an", "on", "is", "us", "el", "ir"]
-
-    prefix = random.choice(prefixes)
-    infix = random.choice(infixes)
-    suffix = random.choice(suffixes)
-    
-    return f"{prefix}{infix}{suffix}"
-
-# Función para mostrar el generador de nombres mágicos
-def show_magic_name_generator():
+# Función para el generador de nombres mágicos
+def show_name_generator():
     st.header("Generador de Nombres Mágicos")
-    st.markdown("""
-    ¡Descubre un nombre mágico único cada vez que hagas clic en el botón!
-    """)
 
-    if st.button("Generar Nombre Mágico"):
-        magic_name = generate_magic_name()
-        st.write(f"**Nombre Mágico Generado:** {magic_name}")
+    name_prompt = "Genera un nombre mágico único."
+    response = genai.generate(prompt=name_prompt, model=model)
+    magical_name = response.text
 
-# Añadir la opción al menú de navegación
-pages.append("Generador de Nombres Mágicos")
+    st.write(f"Tu nombre mágico es: {magical_name}")
 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -265,10 +230,10 @@ elif page == "Eventos Importantes":
 elif page == "Predicciones Futuras":
     show_predictions()
 elif page == "Encuesta de Popularidad":
-    show_poll()
+    show_survey()
 elif page == "Trivia de Harry Potter con IA":
-    show_trivia_with_ai()
+    show_trivia()
 elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
-    show_magic_name_generator()
+    show_name_generator()
