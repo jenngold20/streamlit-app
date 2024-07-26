@@ -27,7 +27,7 @@ def get_css(dark_mode):
                 color: #f9f3e8; /* Texto claro */
             }
             .stButton>button {
-                color: #333333;
+                color: #333333; /*gris*/ 
                 background-color: #f9f3e8; /* Botón claro */
             }
             .stSelectbox>div {
@@ -136,7 +136,7 @@ def footer():
         position: fixed;
         bottom: 0;
         width: 100%;
-        background-color: #f9f3e8;
+        background-color: #E1C5F7;
         text-align: center;
         padding: 10px;
         font-family: 'Garamond', serif;
