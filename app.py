@@ -111,7 +111,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -184,12 +184,12 @@ def show_characters():
         ]
     }
 
-    characters_df = pd.DataFrame(characters_data)
-    st.dataframe(characters_df)
-
-    st.markdown("### Conoce Más")
-    if st.button("Más Información"):
-        st.write("Aquí puedes encontrar detalles adicionales sobre cada personaje.")
+    # Iterar sobre los datos de los personajes y mostrar cada uno
+    for i in range(len(characters_data["Personaje"])):
+        st.subheader(characters_data["Personaje"][i])
+        st.image(characters_data["Imagen"][i], use_column_width=True)
+        st.write(characters_data["Descripción"][i])
+        st.markdown("---")  # Separador entre personajes
 
 # Función para mostrar encuesta de popularidad
 def show_survey():
@@ -239,10 +239,9 @@ def show_trivia():
     if st.session_state.answered_questions == len(trivia_questions):
         st.write(f"Tu puntuación final es: {st.session_state.score}/{len(trivia_questions)}")
 
-# Función para mostrar generador de hechizos aleatorios
-# Función para mostrar generador de hechizos aleatorios
+# Función para mostrar generador de hechizos 
 def show_spell_generator():
-    st.header("Generador de Hechizos Aleatorios")
+    st.header("Generador de Hechizos")
     st.markdown("""
     Genera un hechizo mágico al azar y descubre qué hace.
     """)
@@ -297,7 +296,7 @@ elif page == "Encuesta de Popularidad":
     show_survey()
 elif page == "Trivia de Harry Potter":
     show_trivia()
-elif page == "Generador de Hechizos Aleatorios":
+elif page == "Generador de Hechizos":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_name_generator()
