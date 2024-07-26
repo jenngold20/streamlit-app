@@ -11,6 +11,7 @@ model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 ##########################################################
+
 genai.configure(api_key=GOOGLE_API_KEY)
 
 contexto = (
@@ -24,7 +25,7 @@ model = genai.GenerativeModel('gemini-1.0-pro')
 
 def consultaDumbledore(contexto, consulta):
     prompt = f"{contexto}\n\nConsulta: {consulta}"
-    respuesta_IA = model.generate_content(prompt)  # Asegúrate de que este método exista
+    respuesta_IA = model.generate_content(prompt)  
     return respuesta_IA.text
 
 
@@ -142,23 +143,8 @@ st.sidebar.title("Descubre el mundo mágico")
 pages = ["Inicio", "Consulta con Dumbledore", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
 page = st.sidebar.selectbox("Explora:", pages)
 
-# Función para mostrar la página de inicio
-def show_home():
-    st.header("Inicio")
-    st.markdown("""
-    ¡Bienvenido a la sección de inicio de la aplicación Mundo Mágico de Harry Potter! Aquí te presentamos una visión general de lo que puedes hacer en nuestra aplicación.
-    
-    - **Casas de Hogwarts**: Explora y descubre cuál es tu casa ideal en Hogwarts.
-    - **Personajes Destacados**: Aprende sobre los personajes más importantes de la saga.
-    - **Encuesta de Popularidad**: Vota por tu personaje favorito y consulta los resultados.
-    - **Trivia de Harry Potter**: Responde preguntas para demostrar tu conocimiento sobre el mundo mágico.
-    - **Generador de Hechizos**: Crea hechizos al azar y aprende sobre sus efectos.
-    - **Generador de Nombres Mágicos**: Descubre un nombre mágico único para tus propios personajes.
-    """)
-    
-    st.image('https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/f5d32e60-de07-4b88-9ae4-83ae715f80e1/Default_Genera_una_imagen_mgica_para_la_seccin_de_inicio_de_un_3.jpg', caption='Inicia tu camino mágico')
-   
-    # Footer
+#  Footer
+def footer():
     st.markdown("""
     <style>
     .footer {
@@ -178,7 +164,48 @@ def show_home():
         Creado por Jennifer Goldfeld 2024 | Prompt Engineer para programadores Coderhouse
     </div>
     """, unsafe_allow_html=True)
+    
+################################# INICIO ####################################
 
+# Función para mostrar la página de inicio
+def show_home():
+    st.header("Inicio")
+    st.markdown("""
+    ¡Bienvenido a la sección de inicio de la aplicación Mundo Mágico de Harry Potter! Aquí te presentamos una visión general de lo que puedes hacer en nuestra aplicación.
+    
+    - **Consejos de Dumbledore**: Habla con el sabio Albus Dumbledore y recibe consejos inspiradores y sabiduría mágica para tu aventura en el mundo de Harry Potter.
+    - **Casas de Hogwarts**: Explora y descubre cuál es tu casa ideal en Hogwarts.
+    - **Personajes Destacados**: Aprende sobre los personajes más importantes de la saga.
+    - **Encuesta de Popularidad**: Vota por tu personaje favorito y consulta los resultados.
+    - **Trivia de Harry Potter**: Responde preguntas para demostrar tu conocimiento sobre el mundo mágico.
+    - **Generador de Hechizos**: Crea hechizos al azar y aprende sobre sus efectos.
+    - **Generador de Nombres Mágicos**: Descubre un nombre mágico único para tus propios personajes.
+    """)
+    
+    st.image('https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/f5d32e60-de07-4b88-9ae4-83ae715f80e1/Default_Genera_una_imagen_mgica_para_la_seccin_de_inicio_de_un_3.jpg', caption='Inicia tu camino mágico')
+   
+
+############## Consulta con Dumbledore ################## 
+
+# Función para mostrar la página de consulta con Dumbledore
+def show_dumbledore():
+    st.header("Consulta con Dumbledore")
+    st.markdown("""
+    En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
+    """)
+    st.image("https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/bac0255b-3bfc-4054-bcb4-d34bc372099e/Default_Create_an_image_of_Albus_Dumbledore_the_wise_and_vener_2.jpg", 
+             caption="Albus Dumbledore", width=400) 
+    consulta = st.text_area("Ingresa tu consulta:")
+    if st.button("Consultar"):
+        if consulta:
+            respuesta_IA = consultaDumbledore(contexto, consulta)
+            st.markdown("***Respuesta de Albus Dumbledore:***")
+            st.write(respuesta_IA)
+        else:
+            st.write("Por favor, ingresa una consulta.")   
+            
+############## Casas de Hogwarts ##################      
+       
 # Función para mostrar la página de casas de Hogwarts
 def show_houses():
     st.header("Casas de Hogwarts")
@@ -217,6 +244,9 @@ def show_houses():
         st.write(f"**Casa Seleccionada:** {house}")
         st.write(f"**Características:** {characteristics}")
 
+
+
+############## Personajes destacados ################## 
 # Función para mostrar personajes destacados
 def show_characters():
     st.header("Personajes Destacados")
@@ -259,6 +289,7 @@ if 'votes' not in st.session_state:
         "Severus Snape": 0
     }
 
+############## Encuesta de popularidad ################## 
 # Función para mostrar encuesta de popularidad
 def show_survey():
     st.header("Encuesta de Popularidad")
@@ -279,6 +310,8 @@ def show_survey():
     for character, count in st.session_state.votes.items():
         st.write(f"{character}: {count} votos")
 
+
+############## Trivia de Harry Potter ################## 
 #Sector Trivia 
 def show_trivia():
     st.header("Trivia de Harry Potter")
@@ -314,6 +347,8 @@ def show_trivia():
     if st.session_state.answered_questions == len(trivia_questions):
         st.write(f"Tu puntuación final es: {st.session_state.score}/{len(trivia_questions)}")
 
+
+############## Generador de hechizos ################## 
 # Función para mostrar generador de hechizos 
 def show_spell_generator():
     st.header("Generador de Hechizos")
@@ -344,6 +379,7 @@ def show_spell_generator():
     else:
         st.write("No hay hechizos disponibles en este momento.")
 
+############## Generador de nombres mágicos ##################
 # Función para mostrar generador de nombres mágicos
 def show_name_generator():
     st.header("Generador de Nombres Mágicos")
@@ -361,25 +397,7 @@ def show_name_generator():
         st.write(f"**Nombre Mágico:** {name}")
         
 
-
-# Función para mostrar la página de consulta con Dumbledore
-def show_dumbledore():
-    st.header("Consulta con Dumbledore")
-    st.markdown("""
-    En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
-    """)
-    st.image("https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/bac0255b-3bfc-4054-bcb4-d34bc372099e/Default_Create_an_image_of_Albus_Dumbledore_the_wise_and_vener_2.jpg", 
-             caption="Albus Dumbledore", width=400) 
-    consulta = st.text_area("Ingresa tu consulta:")
-    if st.button("Consultar"):
-        if consulta:
-            respuesta_IA = consultaDumbledore(contexto, consulta)
-            st.markdown("***Respuesta de Albus Dumbledore:***")
-            st.write(respuesta_IA)
-        else:
-            st.write("Por favor, ingresa una consulta.")
-
-
+############## Mostrar páginas seleccionadas ################## 
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
