@@ -53,6 +53,48 @@ def get_css(dark_mode):
         """
     else:
         return """
+          <style>
+            .main {
+                background-color: #333333; /* Fondo oscuro */
+                color: #f9f3e8; /* Texto claro */
+            }
+            .stButton>button {
+                color: #333333;
+                background-color: #f9f3e8; /* Botón claro */
+            }
+            .stSelectbox>div {
+                color: #f9f3e8; /* Color para selectbox en modo oscuro */
+            }
+            .stMarkdown {
+                color: #f9f3e8; /* Color para texto en markdown en modo oscuro */
+            }
+            .header {
+                background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
+                background-size: cover;
+                background-position: center;
+                padding: 50px;
+                text-align: center;
+                color: #f9f3e8; /* Color claro para el encabezado */
+                font-size: 30px;
+                font-weight: bold;
+                border-bottom: 5px solid #f9f3e8; /* Línea inferior para el encabezado en modo oscuro */
+            }
+            .sidebar .sidebar-content {
+                background-color: #555555; /* Fondo oscuro para la barra lateral */
+                color: #f9f3e8;
+            }
+            .sidebar .sidebar-content .stButton>button {
+                color: #555555;
+                background-color: #f9f3e8; /* Color para los botones de la barra lateral en modo oscuro */
+            }
+            /* Agregar un estilo para los textos en selectbox y otros elementos */
+            .stSelectbox div, .stTextInput input, .stTextArea textarea, .stRadio input[type="radio"] {
+                color: #f9f3e8; /* Color claro para selectbox y otros elementos de texto */
+            }
+        </style>
+        """
+    else:
+        return """
         <style>
             .main {
                 background-color: #f9f3e8; /* Fondo claro */
@@ -62,12 +104,11 @@ def get_css(dark_mode):
                 color: #ffffff;
                 background-color: #8a2b8d; /* Color llamativo para botones */
             }
-            .stSelectbox>div, .stRadio>div, .stMarkdown, .stTextInput>div {
-                color: #8a2b8d; /* Color para selectbox, radio buttons, texto en markdown y inputs */
+            .stSelectbox>div {
+                color: #8a2b8d; /* Color para selectbox que coincide con el botón */
             }
-            .stTextInput>input, .stTextArea>textarea {
-                background-color: #ffffff; /* Fondo claro para inputs y textarea */
-                color: #333333; /* Texto oscuro para inputs y textarea */
+            .stMarkdown {
+                color: #8a2b8d; /* Color para texto en markdown */
             }
             .header {
                 background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
@@ -88,8 +129,13 @@ def get_css(dark_mode):
                 color: #8a2b8d;
                 background-color: #E1C5F7; /* Color para los botones de la barra lateral */
             }
+            /* Agregar un estilo para los textos en selectbox y otros elementos */
+            .stSelectbox div, .stTextInput input, .stTextArea textarea, .stRadio input[type="radio"] {
+                color: #333333; /* Color oscuro para selectbox y otros elementos de texto */
+            }
         </style>
         """
+       
 
 # Estado de modo oscuro
 if 'dark_mode' not in st.session_state:
