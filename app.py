@@ -106,19 +106,19 @@ st.markdown('<div class="header">Mundo Mágico de Harry Potter</div>', unsafe_al
 # Título y descripción de la aplicación
 st.title("Bienvenido")
 st.markdown("""
-Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, descubre personajes destacados, eventos importantes, y predicciones sobre el futuro de nuestros personajes favoritos.
+Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, descubre personajes destacados
 """)
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
 def show_home():
     st.header("Inicio")
     st.markdown("""
-    Sumérgete en el mundo mágico de Harry Potter. Aquí podrás explorar las diferentes casas de Hogwarts, conocer más sobre los personajes más queridos, y revisar los eventos más importantes de la saga.
+    Sumérgete en el mundo mágico de Harry Potter. Aquí podrás explorar las diferentes casas de Hogwarts, conocer más sobre los personajes más queridos.
     """)
 
 # Función para mostrar la página de casas de Hogwarts
@@ -190,31 +190,6 @@ def show_characters():
     st.markdown("### Conoce Más")
     if st.button("Más Información"):
         st.write("Aquí puedes encontrar detalles adicionales sobre cada personaje.")
-
-# Función para mostrar eventos importantes
-def show_events():
-    st.header("Eventos Importantes")
-    st.markdown("""
-    Explora los eventos más significativos de la serie de Harry Potter.
-    """)
-
-    events_data = {
-        "Evento": ["Batalla de Hogwarts", "El Torneo de los Tres Magos", "La caída de Voldemort", "La Rescate de Sirius Black", "La Prueba de los Horrocruxes"],
-        "Descripción": [
-            "La batalla final entre los seguidores de Voldemort y los defensores de Hogwarts.",
-            "Un torneo mágico que enfrentó a tres escuelas de magia.",
-            "La derrota final del oscuro señor Voldemort.",
-            "El rescate de Sirius Black, un prisionero injustamente encarcelado.",
-            "La búsqueda y destrucción de los horrocruxes para vencer a Voldemort."
-        ]
-    }
-
-    events_df = pd.DataFrame(events_data)
-    st.dataframe(events_df)
-
-    st.markdown("### Detalles de los Eventos")
-    if st.button("Ver Detalles"):
-        st.write("Aquí se pueden encontrar detalles adicionales sobre cada evento importante.")
 
 # Función para mostrar encuesta de popularidad
 def show_survey():
@@ -299,8 +274,6 @@ elif page == "Casas de Hogwarts":
     show_houses()
 elif page == "Personajes Destacados":
     show_characters()
-elif page == "Eventos Importantes":
-    show_events()
 elif page == "Encuesta de Popularidad":
     show_survey()
 elif page == "Trivia de Harry Potter":
