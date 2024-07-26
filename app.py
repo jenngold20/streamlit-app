@@ -169,7 +169,7 @@ def show_home():
     
     st.image('https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/f5d32e60-de07-4b88-9ae4-83ae715f80e1/Default_Genera_una_imagen_mgica_para_la_seccin_de_inicio_de_un_3.jpg', caption='Inicia tu camino mágico')
    
-
+    footer()
 ############## Consulta con Dumbledore ################## 
 
 # Función para mostrar la página de consulta con Dumbledore
