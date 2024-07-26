@@ -240,6 +240,7 @@ def show_trivia():
         st.write(f"Tu puntuación final es: {st.session_state.score}/{len(trivia_questions)}")
 
 # Función para mostrar generador de hechizos aleatorios
+# Función para mostrar generador de hechizos aleatorios
 def show_spell_generator():
     st.header("Generador de Hechizos Aleatorios")
     st.markdown("""
@@ -258,10 +259,14 @@ def show_spell_generator():
 
     spells = get_spell_data()
 
+    # Verificar si se obtuvieron los hechizos
     if spells:
-        spell = random.choice(spells)
-        st.write(f"**Hechizo:** {spell['name']}")
-        st.write(f"**Descripción:** {spell['description']}")
+        # Crear una clave para el botón basada en un identificador único
+        if st.button("Generar otro hechizo"):
+            # Seleccionar un hechizo aleatorio
+            spell = random.choice(spells)
+            st.write(f"**Hechizo:** {spell['name']}")
+            st.write(f"**Descripción:** {spell['description']}")
     else:
         st.write("No hay hechizos disponibles en este momento.")
 
