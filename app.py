@@ -5,8 +5,6 @@ import requests
 
 import google.generativeai as genai
 
-from IPython.display import display
-from IPython.display import Markdown
 
 model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 
