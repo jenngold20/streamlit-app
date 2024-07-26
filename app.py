@@ -5,9 +5,6 @@ import requests
 import google.generativeai as genai
 
 
-# model = genai.GenerativeModel(model_name='gemini-1.5-flash')
-
-# GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 
 # Configuración de la página
