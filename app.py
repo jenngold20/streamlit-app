@@ -5,9 +5,10 @@ import requests
 import google.generativeai as genai
 
 
-model = genai.GenerativeModel(model_name='gemini-1.5-flash')
+# model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+# GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
