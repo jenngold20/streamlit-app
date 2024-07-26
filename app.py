@@ -2,10 +2,52 @@ import streamlit as st
 import pandas as pd
 import random
 import requests
-# import google.generativeai as genai
 
+import google.generativeai as genai
 
+from IPython.display import display
+from IPython.display import Markdown
 
+model = genai.GenerativeModel(model_name='gemini-1.5-flash')
+
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+
+##########################################################
+genai.configure(api_key=GOOGLE_API_KEY)
+
+contexto = (
+        "Eres Albus Dumbledore, el director de Hogwarts. "
+        "Un usuario realizará preguntas sobre el mundo de Harry Potter. "
+        "Responde de forma sabia y en el estilo característico de Dumbledore, "
+        "brindando información valiosa y orientada a la temática del universo de Harry Potter."
+    )
+
+model = genai.GenerativeModel('gemini-1.0-pro')
+
+def consulta_dumbledore(consulta):
+    """
+    Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
+
+    :param consulta: Pregunta que se desea hacer a Dumbledore.
+    :return: Respuesta generada por el modelo.
+    """
+    prompt = f"{contexto}\n\nConsulta: {consulta}"
+    respuesta_IA = model.generate_content(prompt)
+    return respuesta_IA.text
+
+# Espacio de preguntas del usuario
+st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
+
+consulta = st.text_area("Ingresa tu consulta:")
+
+# Botón para enviar la consulta
+if st.button("Consultar"):
+    if consulta:
+        respuesta = consulta_dumbledore(consulta)
+        st.markdown("***Respuesta de Albus Dumbledore:***")
+        st.write(respuesta)
+    else:
+        st.write("Por favor, ingresa una consulta.")
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
