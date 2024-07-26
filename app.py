@@ -14,21 +14,6 @@ GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
-contexto = (
-        "Eres Albus Dumbledore, el director de Hogwarts. "
-        "Un usuario realizará preguntas sobre el mundo de Harry Potter. "
-        "Responde de forma sabia y en el estilo característico de Dumbledore, "
-        "brindando información valiosa y orientada a la temática del universo de Harry Potter."
-    )
-
-model = genai.GenerativeModel('gemini-1.0-pro')
-
-def consultaDumbledore(contexto, consulta):
-    prompt = f"{contexto}\n\nConsulta: {consulta}"
-    respuesta_IA = model.generate_content(prompt)  
-    return respuesta_IA.text
-
-
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
 
@@ -188,6 +173,20 @@ def show_home():
 ############## Consulta con Dumbledore ################## 
 
 # Función para mostrar la página de consulta con Dumbledore
+
+contexto = (
+        "Eres Albus Dumbledore, el director de Hogwarts. "
+        "Un usuario realizará preguntas sobre el mundo de Harry Potter. "
+        "Responde de forma sabia y en el estilo característico de Dumbledore, "
+        "brindando información valiosa y orientada a la temática del universo de Harry Potter."
+    )
+
+model = genai.GenerativeModel('gemini-1.0-pro')
+
+def consultaDumbledore(contexto, consulta):
+    prompt = f"{contexto}\n\nConsulta: {consulta}"
+    respuesta_IA = model.generate_content(prompt)  
+    return respuesta_IA.text
 def show_dumbledore():
     st.header("Consulta con Dumbledore")
     st.markdown("""
