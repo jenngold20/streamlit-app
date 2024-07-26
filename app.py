@@ -1,6 +1,22 @@
 import streamlit as st
 import pandas as pd
 import random
+import pathlib
+import textwrap
+import google.generativeai as genai
+from IPython.display import display
+from IPython.display import Markdown
+
+#pip install streamlit
+#pip install IPython
+#pip install google-generativeai
+
+GOOGLE_API_KEY= 'AIzaSyC2kzAGBY1e74SKdz4yE9jLl-qsV3DC0w0'
+
+
+genai.configure(api_key=GOOGLE_API_KEY)
+model= genai.GenerativeModel('gemini-1.0-pro')
+
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -56,7 +72,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter con IA","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -169,31 +185,24 @@ def show_poll():
     st.write("Resultados de la Encuesta:")
     for character, count in votes.items():
         st.write(f"{character}: {count} votos")
+        
+        
+        
 
-# Función para mostrar el trivia
-def show_trivia():
-    st.header("Trivia de Harry Potter")
+def generate_trivia_question():
+    prompt = "Genera una pregunta de trivia sobre Harry Potter con una respuesta correcta. La pregunta debe ser interesante y desafiante."
+    response = model.generate_content(prompt)
+    return response.text
+
+def show_trivia_with_ai():
+    st.header("Trivia de Harry Potter Generada por IA")
     st.markdown("""
-    ¡Pon a prueba tus conocimientos sobre el mundo mágico de Harry Potter!
+    Descubre preguntas de trivia sobre Harry Potter generadas por inteligencia artificial.
     """)
 
-    questions = [
-        {"question": "¿Cuál es el nombre completo de Harry Potter?", "options": ["Harry James Potter", "Harry John Potter", "Harry Robert Potter"], "answer": "Harry James Potter"},
-        {"question": "¿Quién es el director de Hogwarts al inicio de la saga?", "options": ["Albus Dumbledore", "Severus Snape", "Minerva McGonagall"], "answer": "Albus Dumbledore"},
-        {"question": "¿Qué hechizo se usa para desarmar a un oponente?", "options": ["Expelliarmus", "Avada Kedavra", "Stupefy"], "answer": "Expelliarmus"}
-    ]
-
-    score = 0
-    for q in questions:
-        st.subheader(q["question"])
-        selected_option = st.radio("Elige una opción:", q["options"])
-        if st.button("Enviar Respuesta", key=q["question"]):
-            if selected_option == q["answer"]:
-                st.success("¡Correcto!")
-                score += 1
-            else:
-                st.error("Incorrecto. La respuesta correcta es: " + q["answer"])
-            st.write("Tu puntuación actual es: " + str(score) + "/" + str(len(questions)))
+    if st.button("Generar Pregunta de Trivia"):
+        trivia_question = generate_trivia_question()
+        st.write(f"**Pregunta de Trivia:** {trivia_question}")
 
 
 # Función para mostrar el generador de hechizos
@@ -257,8 +266,8 @@ elif page == "Predicciones Futuras":
     show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
-elif page == "Trivia de Harry Potter":
-    show_trivia()
+elif page == "Trivia de Harry Potter con IA":
+    show_trivia_with_ai()
 elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
