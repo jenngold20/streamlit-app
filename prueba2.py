@@ -1,6 +1,30 @@
 import streamlit as st
 import pandas as pd
 import random
+import requests
+from openai import OpenAI
+import os
+
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+def obtener_respuesta_dumbledore(pregunta):
+    # Define el prompt para el modelo
+    prompt = f"Imagina que Dumbledore está respondiendo a una pregunta sobre el mundo de Harry Potter. La pregunta es: {pregunta}"
+    
+    # Realiza la solicitud a la API de OpenAI
+    response = client.completions.create(
+        model="gpt-3.5-turbo-instruct",  # Puedes usar otro modelo si lo prefieres
+        prompt=prompt,
+        max_tokens=150,  # Ajusta el número de tokens según tus necesidades
+        temperature=0.7  # Ajusta la creatividad de la respuesta
+    )
+    
+    # Obtén la respuesta del modelo
+    respuesta = response.choices[0].text.strip()
+    
+    return respuesta
+
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -56,7 +80,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos", "Consulta a Dumbledore" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -86,6 +110,23 @@ def show_houses():
 
     houses_df = pd.DataFrame(houses_data)
     st.dataframe(houses_df)
+
+    st.markdown("### Descubre tu Casa de Hogwarts")
+    if st.button("Descubrir mi Casa"):
+        # Definir casas con sus características
+        houses = {
+            "Gryffindor": "Valentía, coraje, determinación",
+            "Slytherin": "Astucia, ambición, liderazgo",
+            "Ravenclaw": "Inteligencia, creatividad, sabiduría",
+            "Hufflepuff": "Lealtad, trabajo duro, paciencia"
+        }
+
+        # Seleccionar una casa aleatoria
+        house = random.choice(list(houses.keys()))
+        characteristics = houses[house]
+
+        st.write(f"**Casa Seleccionada:** {house}")
+        st.write(f"**Características:** {characteristics}")
 
 # Función para mostrar personajes destacados
 def show_characters():
@@ -135,21 +176,6 @@ def show_events():
 
     events_df = pd.DataFrame(events_data)
     st.dataframe(events_df)
-
-# Función para mostrar predicciones futuras
-def show_predictions():
-    st.header("Predicciones Futuras")
-    st.markdown("""
-    ¿Qué les depara el futuro a nuestros personajes favoritos? Aquí te mostramos algunas predicciones sobre el mundo mágico.
-    """)
-
-    st.markdown("""
-    - **Harry Potter:** Seguirá luchando por la justicia y la igualdad en el mundo mágico.
-    - **Hermione Granger:** Posiblemente se convierta en Ministra de Magia, liderando reformas importantes.
-    - **Ron Weasley:** Con su habilidad táctica, podría abrir su propia tienda de artículos mágicos exitosamente.
-    - **Neville Longbottom:** Continuará su carrera en la enseñanza, inspirando a nuevas generaciones de magos y brujas.
-    - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
-    """)
 
 # Función para mostrar la encuesta de popularidad
 def show_poll():
@@ -203,20 +229,26 @@ def show_spell_generator():
     Descubre un hechizo mágico aleatorio cada vez que hagas clic en el botón.
     """)
 
-    spells = {
-        "Expelliarmus": "Hechizo para desarmar a un oponente.",
-        "Lumos": "Hechizo para iluminar la punta de la varita.",
-        "Avada Kedavra": "Hechizo de la muerte, uno de los Tres Hechizos Imperdonables.",
-        "Accio": "Hechizo para atraer objetos hacia el lanzador.",
-        "Expecto Patronum": "Hechizo para conjurar un Patronus y repeler Dementores."
-    }
-
+    # URL de la API
+    api_url = "https://hp-api.onrender.com/api/spells"  
+    
     if st.button("Generar Hechizo"):
-        spell_name = random.choice(list(spells.keys()))
-        spell_description = spells[spell_name]
-        st.write(f"**Hechizo:** {spell_name}")
-        st.write(f"**Descripción:** {spell_description}")
+        try:
+            # Realizar la solicitud a la API
+            response = requests.get(api_url)
+            response.raise_for_status()  # Verifica si la solicitud fue exitosa
+            spells = response.json()
 
+            # Seleccionar un hechizo aleatorio
+            spell = random.choice(spells)
+            spell_name = spell["name"]
+            spell_description = spell["description"]
+
+            st.write(f"**Hechizo:** {spell_name}")
+            st.write(f"**Descripción:** {spell_description}")
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"Error al obtener los datos de la API: {e}")
 
 # Función para generar nombres mágicos aleatorios
 def generate_magic_name():
@@ -241,8 +273,22 @@ def show_magic_name_generator():
         magic_name = generate_magic_name()
         st.write(f"**Nombre Mágico Generado:** {magic_name}")
 
-# Añadir la opción al menú de navegación
-pages.append("Generador de Nombres Mágicos")
+
+def show_dumbledore_section():
+    st.header("Consulta a Dumbledore")
+    st.markdown("""
+    En esta sección, puedes hacer preguntas a Dumbledore sobre el mundo de Harry Potter. 
+    Dumbledore te proporcionará respuestas sabias y profundas basadas en su conocimiento.
+    """)
+
+    pregunta = st.text_input("Escribe tu pregunta sobre Harry Potter:")
+    if st.button("Consultar a Dumbledore"):
+        if pregunta:
+            respuesta = obtener_respuesta_dumbledore(pregunta)
+            st.write(f"**Respuesta de Dumbledore:** {respuesta}")
+        else:
+            st.warning("Por favor, ingresa una pregunta.")
+
 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -253,8 +299,6 @@ elif page == "Personajes Destacados":
     show_characters()
 elif page == "Eventos Importantes":
     show_events()
-elif page == "Predicciones Futuras":
-    show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
 elif page == "Trivia de Harry Potter":
@@ -263,3 +307,5 @@ elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_magic_name_generator()
+elif page == "Consulta a Dumbledore":
+    show_dumbledore_section()
