@@ -139,7 +139,7 @@ st.title("¡Bienvenido al Mundo Mágico de Harry Potter!")
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos", "Consulta con Dumbledore"]
+pages = ["Inicio", "Consulta con Dumbledore", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
