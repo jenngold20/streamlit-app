@@ -1,11 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
-import google.generativeai as genai
 
-GOOGLE_API_KEY = ''  # Agrega tu clave API aquí
-genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-1.0-pro')
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
