@@ -1,0 +1,8 @@
+streamlit
+python-dotenv
+requests
+ipython
+google-generativeai
+pandas
+random
+
