@@ -339,6 +339,7 @@ def show_name_generator():
 
 
 # Función para mostrar la página de consulta con Dumbledore
+# Define una función para mostrar la página de consulta con Dumbledore
 def show_dumbledore():
     st.header("Consulta con Dumbledore")
     st.markdown("""
@@ -355,11 +356,16 @@ def show_dumbledore():
         if consulta:
             # Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
             prompt = f"{contexto}\n\nConsulta: {consulta}"
-            respuesta_IA = model.generate_content(contexto + prompt)
-            st.markdown("***Respuesta de Albus Dumbledore:***")
-            st.write(respuesta_IA)
-            return respuesta_IA.text
-
+            try:
+                # Llama al método correcto del modelo para obtener una respuesta
+                respuesta_IA = model.generate_content(prompt)  # Asegúrate de que el método y el parámetro sean correctos
+                
+                st.markdown("***Respuesta de Albus Dumbledore:***")
+                st.write(respuesta_IA)  # Asegúrate de que `respuesta_IA` sea una cadena de texto
+            except AttributeError as e:
+                st.error(f"Error con el modelo: {e}")
+            except Exception as e:
+                st.error(f"Ha ocurrido un error: {e}")
         else:
             st.write("Por favor, ingresa una consulta.")
 
