@@ -1,22 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import pathlib
-import textwrap
-import google.generativeai as genai
-from IPython.display import display
-from IPython.display import Markdown
-
-#pip install streamlit
-#pip install IPython
-#pip install google-generativeai
-
-GOOGLE_API_KEY= ''
-
-
-genai.configure(api_key=GOOGLE_API_KEY)
-model= genai.GenerativeModel('gemini-1.0-pro')
-
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -185,7 +169,6 @@ def show_poll():
     st.write("Resultados de la Encuesta:")
     for character, count in votes.items():
         st.write(f"{character}: {count} votos")
-           
 
 # Función para mostrar el trivia
 def show_trivia():
