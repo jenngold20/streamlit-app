@@ -4,5 +4,5 @@ requests
 ipython
 google-generativeai
 pandas
-random
+
 
