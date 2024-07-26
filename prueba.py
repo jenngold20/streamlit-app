@@ -1,28 +1,29 @@
 import streamlit as st
 import pandas as pd
+import random
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
 
 # Estilo CSS para la aplicación
 st.markdown("""
-    <style>
+ <style>
     .main {
-        background-color: #f4f4f9;
-        color: #444;
+        background-color: #f9f3e8; /* Fondo claro y cálido */
+        color: #333333; /* Texto oscuro para buen contraste */
     }
     .stButton>button {
         color: #ffffff;
-        background-color: #7f5af0;
+        background-color: #8a2b8d; /* Color llamativo para botones */
     }
     .stSelectbox>div {
-        color: #7f5af0;
+        color: #8a2b8d; /* Color para selectbox que coincide con el botón */
     }
     .stMarkdown {
-        color: #7f5af0;
+        color: #8a2b8d; /* Color para texto en markdown */
     }
     .header {
-        background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
+       background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
         background-size: cover;
         background-position: center;
         padding: 50px;
@@ -30,8 +31,18 @@ st.markdown("""
         color: #ffffff;
         font-size: 30px;
         font-weight: bold;
+        border-bottom: 5px solid #8a2b8d; /* Línea inferior para el encabezado */
+    }
+    .sidebar .sidebar-content {
+        background-color: #E1C5F7
+        color: #8a2b8d;
+    }
+    .sidebar .sidebar-content .stButton>button {
+        color: #8a2b8d;
+        background-color: #E1C5F7; /* Color para los botones de la barra lateral */
     }
     </style>
+        
     """, unsafe_allow_html=True)
 
 # Imagen de encabezado
@@ -45,7 +56,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -159,6 +170,80 @@ def show_poll():
     for character, count in votes.items():
         st.write(f"{character}: {count} votos")
 
+# Función para mostrar el trivia
+def show_trivia():
+    st.header("Trivia de Harry Potter")
+    st.markdown("""
+    ¡Pon a prueba tus conocimientos sobre el mundo mágico de Harry Potter!
+    """)
+
+    questions = [
+        {"question": "¿Cuál es el nombre completo de Harry Potter?", "options": ["Harry James Potter", "Harry John Potter", "Harry Robert Potter"], "answer": "Harry James Potter"},
+        {"question": "¿Quién es el director de Hogwarts al inicio de la saga?", "options": ["Albus Dumbledore", "Severus Snape", "Minerva McGonagall"], "answer": "Albus Dumbledore"},
+        {"question": "¿Qué hechizo se usa para desarmar a un oponente?", "options": ["Expelliarmus", "Avada Kedavra", "Stupefy"], "answer": "Expelliarmus"}
+    ]
+
+    score = 0
+    for q in questions:
+        st.subheader(q["question"])
+        selected_option = st.radio("Elige una opción:", q["options"])
+        if st.button("Enviar Respuesta", key=q["question"]):
+            if selected_option == q["answer"]:
+                st.success("¡Correcto!")
+                score += 1
+            else:
+                st.error("Incorrecto. La respuesta correcta es: " + q["answer"])
+            st.write("Tu puntuación actual es: " + str(score) + "/" + str(len(questions)))
+
+
+# Función para mostrar el generador de hechizos
+def show_spell_generator():
+    st.header("Generador de Hechizos Aleatorios")
+    st.markdown("""
+    Descubre un hechizo mágico aleatorio cada vez que hagas clic en el botón.
+    """)
+
+    spells = {
+        "Expelliarmus": "Hechizo para desarmar a un oponente.",
+        "Lumos": "Hechizo para iluminar la punta de la varita.",
+        "Avada Kedavra": "Hechizo de la muerte, uno de los Tres Hechizos Imperdonables.",
+        "Accio": "Hechizo para atraer objetos hacia el lanzador.",
+        "Expecto Patronum": "Hechizo para conjurar un Patronus y repeler Dementores."
+    }
+
+    if st.button("Generar Hechizo"):
+        spell_name = random.choice(list(spells.keys()))
+        spell_description = spells[spell_name]
+        st.write(f"**Hechizo:** {spell_name}")
+        st.write(f"**Descripción:** {spell_description}")
+
+
+# Función para generar nombres mágicos aleatorios
+def generate_magic_name():
+    prefixes = ["Al", "El", "Va", "Ro", "Ma", "Sy", "Ga", "Le", "Di", "Ze"]
+    infixes = ["nar", "mor", "ven", "lor", "ris", "zom", "ral", "tar", "don", "bel"]
+    suffixes = ["ius", "or", "en", "ar", "an", "on", "is", "us", "el", "ir"]
+
+    prefix = random.choice(prefixes)
+    infix = random.choice(infixes)
+    suffix = random.choice(suffixes)
+    
+    return f"{prefix}{infix}{suffix}"
+
+# Función para mostrar el generador de nombres mágicos
+def show_magic_name_generator():
+    st.header("Generador de Nombres Mágicos")
+    st.markdown("""
+    ¡Descubre un nombre mágico único cada vez que hagas clic en el botón!
+    """)
+
+    if st.button("Generar Nombre Mágico"):
+        magic_name = generate_magic_name()
+        st.write(f"**Nombre Mágico Generado:** {magic_name}")
+
+# Añadir la opción al menú de navegación
+pages.append("Generador de Nombres Mágicos")
+
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -172,3 +257,9 @@ elif page == "Predicciones Futuras":
     show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
+elif page == "Trivia de Harry Potter":
+    show_trivia()
+elif page == "Generador de Hechizos Aleatorios":
+    show_spell_generator()
+elif page == "Generador de Nombres Mágicos":
+    show_magic_name_generator()
