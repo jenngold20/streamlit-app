@@ -14,46 +14,7 @@ st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":spark
 def get_css(dark_mode):
     if dark_mode:
         return """
-        <style>
-            .main {
-                background-color: #333333; /* Fondo oscuro */
-                color: #f9f3e8; /* Texto claro */
-            }
-            .stButton>button {
-                color: #333333;
-                background-color: #f9f3e8; /* Botón claro */
-            }
-            .stSelectbox>div, .stRadio>div, .stMarkdown, .stTextInput>div {
-                color: #f9f3e8; /* Color para selectbox, radio buttons, texto en markdown y inputs */
-            }
-            .stTextInput>input, .stTextArea>textarea {
-                background-color: #555555; /* Fondo oscuro para inputs y textarea */
-                color: #f9f3e8; /* Texto claro para inputs y textarea */
-            }
-            .header {
-                background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
-                background-size: cover;
-                background-position: center;
-                padding: 50px;
-                text-align: center;
-                color: #f9f3e8;
-                font-size: 30px;
-                font-weight: bold;
-                border-bottom: 5px solid #f9f3e8; /* Línea inferior para el encabezado en modo oscuro */
-            }
-            .sidebar .sidebar-content {
-                background-color: #555555; /* Fondo oscuro para la barra lateral */
-                color: #f9f3e8;
-            }
-            .sidebar .sidebar-content .stButton>button {
-                color: #555555;
-                background-color: #f9f3e8; /* Color para los botones de la barra lateral en modo oscuro */
-            }
-        </style>
-        """
-    else:
-        return """
-          <style>
+         <style>
             .main {
                 background-color: #333333; /* Fondo oscuro */
                 color: #f9f3e8; /* Texto claro */
