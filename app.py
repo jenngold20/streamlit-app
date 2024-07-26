@@ -1,11 +1,6 @@
 import streamlit as st
 import pandas as pd
 import random
-import requests
-
-
-API_KEY = 'AIzaSyC2kzAGBY1e74SKdz4yE9jLl-qsV3DC0w0'
-API_URL = 'https://potterhead-api.vercel.app/api/v1/houses'
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -71,16 +66,6 @@ def show_home():
     Sumérgete en el mundo mágico de Harry Potter. Aquí podrás explorar las diferentes casas de Hogwarts, conocer más sobre los personajes más queridos, y revisar los eventos más importantes de la saga.
     """)
 
-# Función para obtener datos de las casas de Hogwarts desde la API
-def get_hogwarts_houses():
-    response = requests.get(API_URL)
-    if response.status_code == 200:
-        data = response.json()
-        return data
-    else:
-        st.error("No se pudieron obtener los datos de las casas de Hogwarts.")
-        return []
-
 # Función para mostrar la página de casas de Hogwarts
 def show_houses():
     st.header("Casas de Hogwarts")
@@ -88,14 +73,19 @@ def show_houses():
     En esta sección encontrarás información sobre las cuatro casas de Hogwarts: Gryffindor, Slytherin, Ravenclaw y Hufflepuff.
     """)
 
-    houses_data = get_hogwarts_houses()
+    houses_data = {
+        "Casa": ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"],
+        "Características": [
+            "Valentía, coraje, determinación",
+            "Astucia, ambición, liderazgo",
+            "Inteligencia, creatividad, sabiduría",
+            "Lealtad, trabajo duro, paciencia"
+        ],
+        "Fundador": ["Godric Gryffindor", "Salazar Slytherin", "Rowena Ravenclaw", "Helga Hufflepuff"]
+    }
 
-    if houses_data:
-        houses_df = pd.DataFrame(houses_data)
-        st.dataframe(houses_df)
-
-
-
+    houses_df = pd.DataFrame(houses_data)
+    st.dataframe(houses_df)
 
 # Función para mostrar personajes destacados
 def show_characters():
