@@ -4,10 +4,6 @@ import random
 import requests
 import google.generativeai as genai
 
-from dotenv import load_dotenv
-
-
-
 
 model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 
