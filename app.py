@@ -180,14 +180,14 @@ def show_characters():
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/ef847676-9c6b-428a-b9d6-677511a6f15d/Default_Create_an_image_of_Hermione_Granger_the_brilliant_youn_1.jpg",
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/163c7e3d-1162-419d-b969-de7648ca586f/Default_Create_an_image_of_Ron_Weasley_the_loyal_and_brave_you_0.jpg",
             "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/bac0255b-3bfc-4054-bcb4-d34bc372099e/Default_Create_an_image_of_Albus_Dumbledore_the_wise_and_vener_2.jpg",
-            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/0b415f30-cb7c-4033-b0da-5c6358c278f1/Default_Create_an_image_of_Severus_Snape_the_complex_and_haunted_0.jpg"
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/fa2518ba-7da9-4006-811a-71dbce3971a2/Default_Create_an_image_of_Severus_Snape_the_enigmatic_and_com_3.jpg"
         ]
     }
 
-    # Iterar sobre los datos de los personajes y mostrar cada uno
+ # Iterar sobre los datos de los personajes y mostrar cada uno
     for i in range(len(characters_data["Personaje"])):
         st.subheader(characters_data["Personaje"][i])
-        st.image(characters_data["Imagen"][i], use_column_width=True)
+        st.image(characters_data["Imagen"][i], width=200)  # Ajusta el ancho de la imagen a 200 píxeles
         st.write(characters_data["Descripción"][i])
         st.markdown("---")  # Separador entre personajes
 
