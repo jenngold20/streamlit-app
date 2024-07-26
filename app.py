@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import random
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -55,7 +56,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -194,6 +195,55 @@ def show_trivia():
                 st.error("Incorrecto. La respuesta correcta es: " + q["answer"])
             st.write("Tu puntuación actual es: " + str(score) + "/" + str(len(questions)))
 
+
+# Función para mostrar el generador de hechizos
+def show_spell_generator():
+    st.header("Generador de Hechizos Aleatorios")
+    st.markdown("""
+    Descubre un hechizo mágico aleatorio cada vez que hagas clic en el botón.
+    """)
+
+    spells = {
+        "Expelliarmus": "Hechizo para desarmar a un oponente.",
+        "Lumos": "Hechizo para iluminar la punta de la varita.",
+        "Avada Kedavra": "Hechizo de la muerte, uno de los Tres Hechizos Imperdonables.",
+        "Accio": "Hechizo para atraer objetos hacia el lanzador.",
+        "Expecto Patronum": "Hechizo para conjurar un Patronus y repeler Dementores."
+    }
+
+    if st.button("Generar Hechizo"):
+        spell_name = random.choice(list(spells.keys()))
+        spell_description = spells[spell_name]
+        st.write(f"**Hechizo:** {spell_name}")
+        st.write(f"**Descripción:** {spell_description}")
+
+
+# Función para generar nombres mágicos aleatorios
+def generate_magic_name():
+    prefixes = ["Al", "El", "Va", "Ro", "Ma", "Sy", "Ga", "Le", "Di", "Ze"]
+    infixes = ["nar", "mor", "ven", "lor", "ris", "zom", "ral", "tar", "don", "bel"]
+    suffixes = ["ius", "or", "en", "ar", "an", "on", "is", "us", "el", "ir"]
+
+    prefix = random.choice(prefixes)
+    infix = random.choice(infixes)
+    suffix = random.choice(suffixes)
+    
+    return f"{prefix}{infix}{suffix}"
+
+# Función para mostrar el generador de nombres mágicos
+def show_magic_name_generator():
+    st.header("Generador de Nombres Mágicos")
+    st.markdown("""
+    ¡Descubre un nombre mágico único cada vez que hagas clic en el botón!
+    """)
+
+    if st.button("Generar Nombre Mágico"):
+        magic_name = generate_magic_name()
+        st.write(f"**Nombre Mágico Generado:** {magic_name}")
+
+# Añadir la opción al menú de navegación
+pages.append("Generador de Nombres Mágicos")
+
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -209,3 +259,7 @@ elif page == "Encuesta de Popularidad":
     show_poll()
 elif page == "Trivia de Harry Potter":
     show_trivia()
+elif page == "Generador de Hechizos Aleatorios":
+    show_spell_generator()
+elif page == "Generador de Nombres Mágicos":
+    show_magic_name_generator()
