@@ -24,30 +24,7 @@ contexto = (
 
 model = genai.GenerativeModel('gemini-1.0-pro')
 
-def consulta_dumbledore(consulta):
-    """
-    Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
 
-    :param consulta: Pregunta que se desea hacer a Dumbledore.
-    :return: Respuesta generada por el modelo.
-    """
-    prompt = f"{contexto}\n\nConsulta: {consulta}"
-    respuesta_IA = model.generate_content(prompt)
-    return respuesta_IA.text
-
-# Espacio de preguntas del usuario
-st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
-
-consulta = st.text_area("Ingresa tu consulta:")
-
-# Botón para enviar la consulta
-if st.button("Consultar"):
-    if consulta:
-        respuesta = consulta_dumbledore(consulta)
-        st.markdown("***Respuesta de Albus Dumbledore:***")
-        st.write(respuesta)
-    else:
-        st.write("Por favor, ingresa una consulta.")
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -168,7 +145,7 @@ Aquí puedes:
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos", "Generador de Nombres Mágicos", "Consulta con Dumbledore"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -366,6 +343,51 @@ def show_name_generator():
     if st.button("Generar Nombre Mágico"):
         name = generate_magic_name()
         st.write(f"**Nombre Mágico:** {name}")
+        
+# def consulta_dumbledore(consulta):
+#     """
+#     Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
+
+#     :param consulta: Pregunta que se desea hacer a Dumbledore.
+#     :return: Respuesta generada por el modelo.
+#     """
+#     prompt = f"{contexto}\n\nConsulta: {consulta}"
+#     respuesta_IA = model.generate_content(prompt)
+#     return respuesta_IA.text
+
+# # Espacio de preguntas del usuario
+# st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
+
+# consulta = st.text_area("Ingresa tu consulta:")
+
+# # Botón para enviar la consulta
+# if st.button("Consultar"):
+#     if consulta:
+#         respuesta = consulta_dumbledore(consulta)
+#         st.markdown("***Respuesta de Albus Dumbledore:***")
+#         st.write(respuesta)
+#     else:
+#         st.write("Por favor, ingresa una consulta.")
+
+
+
+# Función para mostrar la página de consulta con Dumbledore
+def show_dumbledore():
+    st.header("Consulta con Dumbledore")
+    st.markdown("""
+    En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
+    """)
+
+    question = st.text_input("Escribe tu pregunta para Dumbledore:")
+
+    if st.button("Consultar"):
+        if question:
+            # Consulta al modelo generativo de IA con la pregunta
+            response = model.generate(prompt=f"{contexto} Pregunta: {question}")
+            st.write(f"**Respuesta de Dumbledore:** {response}")
+        else:
+            st.write("Por favor, escribe una pregunta.")
+
 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -382,3 +404,5 @@ elif page == "Generador de Hechizos":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_name_generator()
+elif page == "Consulta con Dumbledore":
+    show_dumbledore()
