@@ -23,14 +23,15 @@ def get_css(dark_mode):
                 color: #333333;
                 background-color: #f9f3e8; /* Botón claro */
             }
-            .stSelectbox>div {
-                color: #f9f3e8; /* Color para selectbox en modo oscuro */
+            .stSelectbox>div, .stRadio>div, .stMarkdown, .stTextInput>div {
+                color: #f9f3e8; /* Color para selectbox, radio buttons, texto en markdown y inputs */
             }
-            .stMarkdown {
-                color: #f9f3e8; /* Color para texto en markdown en modo oscuro */
+            .stTextInput>input, .stTextArea>textarea {
+                background-color: #555555; /* Fondo oscuro para inputs y textarea */
+                color: #f9f3e8; /* Texto claro para inputs y textarea */
             }
             .header {
-               background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
+                background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
                 background-size: cover;
                 background-position: center;
                 padding: 50px;
@@ -61,14 +62,15 @@ def get_css(dark_mode):
                 color: #ffffff;
                 background-color: #8a2b8d; /* Color llamativo para botones */
             }
-            .stSelectbox>div {
-                color: #8a2b8d; /* Color para selectbox que coincide con el botón */
+            .stSelectbox>div, .stRadio>div, .stMarkdown, .stTextInput>div {
+                color: #8a2b8d; /* Color para selectbox, radio buttons, texto en markdown y inputs */
             }
-            .stMarkdown {
-                color: #8a2b8d; /* Color para texto en markdown */
+            .stTextInput>input, .stTextArea>textarea {
+                background-color: #ffffff; /* Fondo claro para inputs y textarea */
+                color: #333333; /* Texto oscuro para inputs y textarea */
             }
             .header {
-               background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
+                background-image: url('https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ');
                 background-size: cover;
                 background-position: center;
                 padding: 50px;
