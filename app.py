@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import random
 import requests
+import openai
 
+
+openai.api_key = 'AIzaSyC2kzAGBY1e74SKdz4yE9jLl-qsV3DC0w0'
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -58,7 +61,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Consultas a Dumbledore", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -253,6 +256,29 @@ def show_magic_name_generator():
 
 
 
+def query_ai(question):
+    response = openai.Completion.create(
+        engine="text-davinci-003",  # Puedes usar otro modelo si lo prefieres
+        prompt=f"Responde a la siguiente pregunta sobre Harry Potter: {question}",
+        max_tokens=150
+    )
+    return response.choices[0].text.strip()
+
+def show_ai_section():
+    st.header("Consulta a la IA sobre Harry Potter")
+    st.markdown("""
+    En esta sección, puedes hacerle preguntas a una inteligencia artificial sobre el mundo de Harry Potter. 
+    La IA te proporcionará respuestas basadas en su conocimiento.
+    """)
+
+    question = st.text_input("Escribe tu pregunta sobre Harry Potter:")
+    if st.button("Consultar IA"):
+        if question:
+            answer = query_ai(question)
+            st.write(f"**Respuesta de la IA:** {answer}")
+        else:
+            st.warning("Por favor, ingresa una pregunta.")
+
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -270,4 +296,6 @@ elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_magic_name_generator()
+elif page == "Consultas a Dumbledore":
+    show_ai_section()
 
