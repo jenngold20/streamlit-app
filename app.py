@@ -202,7 +202,7 @@ def show_dumbledore():
             st.write(respuesta_IA)
         else:
             st.write("Por favor, ingresa una consulta.")   
-            
+    footer()       
 ############## Casas de Hogwarts ##################      
        
 # Función para mostrar la página de casas de Hogwarts
@@ -242,7 +242,7 @@ def show_houses():
 
         st.write(f"**Casa Seleccionada:** {house}")
         st.write(f"**Características:** {characteristics}")
-
+    footer()
 
 
 ############## Personajes destacados ################## 
@@ -278,6 +278,11 @@ def show_characters():
         st.write(characters_data["Descripción"][i])
         st.markdown("---")  # Separador entre personajes
 
+
+    footer()
+############## Encuesta de popularidad ################## 
+# Función para mostrar encuesta de popularidad
+
 # Inicializar el estado de la sesión para los votos
 if 'votes' not in st.session_state:
     st.session_state.votes = {
@@ -287,9 +292,6 @@ if 'votes' not in st.session_state:
         "Albus Dumbledore": 0,
         "Severus Snape": 0
     }
-
-############## Encuesta de popularidad ################## 
-# Función para mostrar encuesta de popularidad
 def show_survey():
     st.header("Encuesta de Popularidad")
     st.markdown("""
@@ -308,7 +310,7 @@ def show_survey():
     st.markdown("### Resultados de la Encuesta")
     for character, count in st.session_state.votes.items():
         st.write(f"{character}: {count} votos")
-
+    footer()
 
 ############## Trivia de Harry Potter ################## 
 #Sector Trivia 
@@ -345,7 +347,7 @@ def show_trivia():
     # Mostrar puntuación final si se han respondido todas las preguntas
     if st.session_state.answered_questions == len(trivia_questions):
         st.write(f"Tu puntuación final es: {st.session_state.score}/{len(trivia_questions)}")
-
+    footer()
 
 ############## Generador de hechizos ################## 
 # Función para mostrar generador de hechizos 
@@ -377,7 +379,8 @@ def show_spell_generator():
             st.write(f"**Descripción:** {spell['description']}")
     else:
         st.write("No hay hechizos disponibles en este momento.")
-
+    footer()
+    
 ############## Generador de nombres mágicos ##################
 # Función para mostrar generador de nombres mágicos
 def show_name_generator():
@@ -394,7 +397,7 @@ def show_name_generator():
     if st.button("Generar Nombre Mágico"):
         name = generate_magic_name()
         st.write(f"**Nombre Mágico:** {name}")
-        
+    footer()      
 
 ############## Mostrar páginas seleccionadas ################## 
 # Mostrar la página seleccionada
