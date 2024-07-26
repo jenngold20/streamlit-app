@@ -155,7 +155,29 @@ def show_home():
     - **Generador de Hechizos**: Crea hechizos al azar y aprende sobre sus efectos.
     - **Generador de Nombres Mágicos**: Descubre un nombre mágico único para tus propios personajes.
     """)
-
+    
+    st.image('https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/f5d32e60-de07-4b88-9ae4-83ae715f80e1/Default_Genera_una_imagen_mgica_para_la_seccin_de_inicio_de_un_3.jpg', caption='Inicia tu camino mágico')
+   
+    # Footer
+    st.markdown("""
+    <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 10px;
+        font-family: 'Garamond', serif;
+        font-size: 14px;
+        color: #333;
+        border-top: 1px solid #ccc;
+    }
+    </style>
+    <div class="footer">
+        Creado por Jennifer Goldfeld 2024 | Prompt Engineer para programadores Coderhouse
+    </div>
+    """, unsafe_allow_html=True)
 
 # Función para mostrar la página de casas de Hogwarts
 def show_houses():
