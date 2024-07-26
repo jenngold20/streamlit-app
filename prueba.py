@@ -91,20 +91,11 @@ def show_characters():
             "Leal amigo de Harry, siempre dispuesto a ayudar.",
             "Director de Hogwarts, uno de los magos más poderosos.",
             "Profesor de Pociones, conocido por su complejidad moral."
-        ],
-        "Imagen": [
-            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/122be6ec-0db1-4080-bb35-c6ec011bf9d4/Default_Create_an_image_of_Harry_Potter_the_iconic_young_wizar_2.jpg",
-            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/ef847676-9c6b-428a-b9d6-677511a6f15d/Default_Create_an_image_of_Hermione_Granger_the_brilliant_youn_1.jpg",
-            "https://link_a_imagen_de_ron.jpg",
-            "https://link_a_imagen_de_dumbledore.jpg",
-            "https://link_a_imagen_de_snape.jpg"
         ]
     }
 
-    for i in range(len(characters_data["Personaje"])):
-        st.subheader(characters_data["Personaje"][i])
-        st.image(characters_data["Imagen"][i], width=150)
-        st.markdown(characters_data["Descripción"][i])
+    characters_df = pd.DataFrame(characters_data)
+    st.dataframe(characters_df)
 
 # Función para mostrar eventos importantes
 def show_events():
