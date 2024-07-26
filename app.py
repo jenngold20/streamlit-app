@@ -34,8 +34,8 @@ st.markdown("""
         border-bottom: 5px solid #8a2b8d; /* Línea inferior para el encabezado */
     }
     .sidebar .sidebar-content {
-        background-color: #8a2b8d; /* Fondo de la barra lateral */
-        color: #ffffff;
+        background-color: #E1C5F7
+        color: #711BB5;
     }
     .sidebar .sidebar-content .stButton>button {
         color: #ffffff;
