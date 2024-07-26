@@ -3,7 +3,6 @@ import pandas as pd
 import random
 import requests
 from openai import OpenAI
-import sett
 import os
 
 
