@@ -355,7 +355,7 @@ def show_dumbledore():
         if consulta:
             # Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
             prompt = f"{contexto}\n\nConsulta: {consulta}"
-            respuesta_IA = model.generate(prompt=prompt)
+            respuesta_IA = model.generate_content(contexto + prompt)
             st.markdown("***Respuesta de Albus Dumbledore:***")
             st.write(respuesta_IA)
             return respuesta_IA.text
