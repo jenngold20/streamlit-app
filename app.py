@@ -346,6 +346,8 @@ def show_dumbledore():
     st.markdown("""
     En esta sección puedes hacer preguntas a Albus Dumbledore y recibir respuestas sabias y reflexivas.
     """)
+    st.image("https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/bac0255b-3bfc-4054-bcb4-d34bc372099e/Default_Create_an_image_of_Albus_Dumbledore_the_wise_and_vener_2.jpg", 
+             caption="Albus Dumbledore", width=400) 
     consulta = st.text_area("Ingresa tu consulta:")
     if st.button("Consultar"):
         if consulta:
