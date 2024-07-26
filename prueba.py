@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import random
+import requests
+
 
 # Configuración de la página
 st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
@@ -56,7 +58,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos","Descubre tu Casa" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -135,21 +137,6 @@ def show_events():
 
     events_df = pd.DataFrame(events_data)
     st.dataframe(events_df)
-
-# Función para mostrar predicciones futuras
-def show_predictions():
-    st.header("Predicciones Futuras")
-    st.markdown("""
-    ¿Qué les depara el futuro a nuestros personajes favoritos? Aquí te mostramos algunas predicciones sobre el mundo mágico.
-    """)
-
-    st.markdown("""
-    - **Harry Potter:** Seguirá luchando por la justicia y la igualdad en el mundo mágico.
-    - **Hermione Granger:** Posiblemente se convierta en Ministra de Magia, liderando reformas importantes.
-    - **Ron Weasley:** Con su habilidad táctica, podría abrir su propia tienda de artículos mágicos exitosamente.
-    - **Neville Longbottom:** Continuará su carrera en la enseñanza, inspirando a nuevas generaciones de magos y brujas.
-    - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
-    """)
 
 # Función para mostrar la encuesta de popularidad
 def show_poll():
@@ -241,8 +228,26 @@ def show_magic_name_generator():
         magic_name = generate_magic_name()
         st.write(f"**Nombre Mágico Generado:** {magic_name}")
 
-# Añadir la opción al menú de navegación
-pages.append("Generador de Nombres Mágicos")
+
+
+
+def get_houses():
+    url = "https://potterhead-api.vercel.app/api/houses"
+    response = requests.get(url)
+    return response.json()
+
+def show_house_discovery():
+    st.header("Descubre tu Casa de Hogwarts")
+    st.markdown("""
+    Descubre a qué casa de Hogwarts perteneces con la ayuda de la magia de la API Potterhead.
+    """)
+
+    if st.button("Descubrir mi Casa"):
+        houses = get_houses()
+        # Seleccionar aleatoriamente una casa
+        selected_house = random.choice(houses)
+        st.write(f"¡Perteneces a la casa de **{selected_house}**!")
+
 
 # Mostrar la página seleccionada
 if page == "Inicio":
@@ -253,8 +258,6 @@ elif page == "Personajes Destacados":
     show_characters()
 elif page == "Eventos Importantes":
     show_events()
-elif page == "Predicciones Futuras":
-    show_predictions()
 elif page == "Encuesta de Popularidad":
     show_poll()
 elif page == "Trivia de Harry Potter":
@@ -263,3 +266,5 @@ elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_magic_name_generator()
+elif page == "Descubre tu Casa":
+    show_house_discovery()

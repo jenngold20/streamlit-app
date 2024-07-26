@@ -190,20 +190,26 @@ def show_spell_generator():
     Descubre un hechizo mágico aleatorio cada vez que hagas clic en el botón.
     """)
 
-    spells = {
-        "Expelliarmus": "Hechizo para desarmar a un oponente.",
-        "Lumos": "Hechizo para iluminar la punta de la varita.",
-        "Avada Kedavra": "Hechizo de la muerte, uno de los Tres Hechizos Imperdonables.",
-        "Accio": "Hechizo para atraer objetos hacia el lanzador.",
-        "Expecto Patronum": "Hechizo para conjurar un Patronus y repeler Dementores."
-    }
-
+    # URL de la API
+    api_url = "https://hp-api.onrender.com/api/spells"  
+    
     if st.button("Generar Hechizo"):
-        spell_name = random.choice(list(spells.keys()))
-        spell_description = spells[spell_name]
-        st.write(f"**Hechizo:** {spell_name}")
-        st.write(f"**Descripción:** {spell_description}")
+        try:
+            # Realizar la solicitud a la API
+            response = requests.get(api_url)
+            response.raise_for_status()  # Verifica si la solicitud fue exitosa
+            spells = response.json()
 
+            # Seleccionar un hechizo aleatorio
+            spell = random.choice(spells)
+            spell_name = spell["name"]
+            spell_description = spell["description"]
+
+            st.write(f"**Hechizo:** {spell_name}")
+            st.write(f"**Descripción:** {spell_description}")
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"Error al obtener los datos de la API: {e}")
 
 # Función para generar nombres mágicos aleatorios
 def generate_magic_name():
