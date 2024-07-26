@@ -146,7 +146,7 @@ def footer():
     }
     </style>
     <div class="footer">
-        Creado por Jennifer Goldfeld ❣ | Prompt Engineer para programadores | Coderhouse 2024
+        Creado por Jennifer Goldfeld ❣ | Prompt Engineering para programadores | Coderhouse 2024
     </div>
     """, unsafe_allow_html=True)
     
