@@ -1,126 +1,111 @@
 import streamlit as st
-
-######## Instalaciones necesarias --------------------------------
-#pip install streamlit
-#pip install IPython
-#pip install google-generativeai
-#pip install pandas
+import pandas as pd
 
 # Configuración de la página
-st.set_page_config(page_title="Fixture Interactivo Copa América 2024", page_icon=":soccer:", layout="wide")
+st.set_page_config(page_title="Mundo Mágico de Harry Potter", page_icon=":sparkles:", layout="wide")
 
 # Título y descripción de la aplicación
-st.title("Fixture Interactivo Copa América 2024")
+st.title("Mundo Mágico de Harry Potter")
 st.markdown("""
-Bienvenido al fixture interactivo de la Copa América 2024. Aquí podrás ver los resultados de los partidos, análisis de tendencias y predicciones sobre los equipos favoritos.
+Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, descubre personajes destacados, eventos importantes, y predicciones sobre el futuro de nuestros personajes favoritos.
 """)
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Equipos y Jugadores", "Fixture de Partidos", "Resultados", "Análisis y Predicciones"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
 def show_home():
     st.header("Inicio")
     st.markdown("""
-    Esta aplicación te permitirá seguir de cerca todos los partidos de la Copa América 2024, ver los resultados en tiempo real y obtener análisis detallados sobre los equipos y sus posibilidades en el torneo.
+    Sumérgete en el mundo mágico de Harry Potter. Aquí podrás explorar las diferentes casas de Hogwarts, conocer más sobre los personajes más queridos, y revisar los eventos más importantes de la saga.
     """)
 
-# Función para mostrar la página de equipos y jugadores destacados
-def show_teams():
-    st.header("Equipos y Jugadores Destacados")
+# Función para mostrar la página de casas de Hogwarts
+def show_houses():
+    st.header("Casas de Hogwarts")
     st.markdown("""
-    En esta sección encontrarás información sobre los equipos participantes y sus jugadores más destacados.
+    En esta sección encontrarás información sobre las cuatro casas de Hogwarts: Gryffindor, Slytherin, Ravenclaw y Hufflepuff.
     """)
-    # Aquí agregarías la información detallada de los equipos y jugadores
 
-# Función para mostrar el fixture de partidos
-def show_fixture():
-    st.header("Fixture de Partidos")
+    houses_data = {
+        "Casa": ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"],
+        "Características": [
+            "Valentía, coraje, determinación",
+            "Astucia, ambición, liderazgo",
+            "Inteligencia, creatividad, sabiduría",
+            "Lealtad, trabajo duro, paciencia"
+        ],
+        "Fundador": ["Godric Gryffindor", "Salazar Slytherin", "Rowena Ravenclaw", "Helga Hufflepuff"]
+    }
+
+    houses_df = pd.DataFrame(houses_data)
+    st.dataframe(houses_df)
+
+# Función para mostrar personajes destacados
+def show_characters():
+    st.header("Personajes Destacados")
     st.markdown("""
-    Aquí puedes ver el calendario de los partidos de la Copa América 2024.
+    Descubre información sobre algunos de los personajes más destacados de la saga de Harry Potter.
     """)
-    # Aquí agregarías el fixture interactivo
 
-# Función para mostrar los resultados de los partidos
-def show_results():
-    st.header("Resultados de Partidos")
+    characters_data = {
+        "Personaje": ["Harry Potter", "Hermione Granger", "Ron Weasley", "Albus Dumbledore", "Severus Snape"],
+        "Descripción": [
+            "El niño que vivió, conocido por derrotar a Voldemort.",
+            "Una de las brujas más inteligentes de su generación.",
+            "Leal amigo de Harry, siempre dispuesto a ayudar.",
+            "Director de Hogwarts, uno de los magos más poderosos.",
+            "Profesor de Pociones, conocido por su complejidad moral."
+        ]
+    }
+
+    characters_df = pd.DataFrame(characters_data)
+    st.dataframe(characters_df)
+
+# Función para mostrar eventos importantes
+def show_events():
+    st.header("Eventos Importantes")
     st.markdown("""
-    Consulta los resultados de los partidos jugados hasta ahora.
+    Revive algunos de los eventos más importantes que tuvieron lugar en el mundo mágico de Harry Potter.
     """)
-    # Aquí agregarías los resultados de los partidos
 
-# Función para mostrar el análisis de tendencias y predicciones
-def show_analysis():
-    st.header("Análisis y Predicciones")
+    events_data = {
+        "Evento": ["La Batalla de Hogwarts", "El Torneo de los Tres Magos", "La Fundación de Hogwarts"],
+        "Descripción": [
+            "La batalla final entre el bien y el mal en la escuela.",
+            "Competencia mágica entre tres escuelas de magia.",
+            "La creación de la escuela de magia más famosa del mundo."
+        ]
+    }
+
+    events_df = pd.DataFrame(events_data)
+    st.dataframe(events_df)
+
+# Función para mostrar predicciones futuras
+def show_predictions():
+    st.header("Predicciones Futuras")
     st.markdown("""
-    Basándonos en las tendencias y el rendimiento de los equipos, estas son nuestras predicciones sobre los posibles ganadores de la Copa América 2024.
+    ¿Qué les depara el futuro a nuestros personajes favoritos? Aquí te mostramos algunas predicciones sobre el mundo mágico.
     """)
-    # Aquí agregarías el análisis y las predicciones
 
-import pandas as pd
-
-# Datos de equipos y jugadores
-teams_data = {
-    "Equipo": ["Argentina", "Brasil", "Uruguay", "Colombia", "México", "Estados Unidos", "Canadá"],
-    "Jugadores Destacados": [
-        "Lionel Messi, Lautaro Martínez, Paulo Dybala",
-        "Neymar Jr., Vinicius Junior, Casemiro",
-        "Federico Valverde, Ronald Araújo, Darwin Núñez",
-        "James Rodríguez, Davinson Sánchez, Luis Díaz",
-        "Hirving Lozano, Raúl Jiménez, Jesús Corona",
-        "Christian Pulisic, Weston McKennie, Giovanni Reyna",
-        "Alphonso Davies, Jonathan David, Cyle Larin"
-    ],
-    "Entrenador": ["Lionel Scaloni", "Tite", "Diego Alonso", "Reinaldo Rueda", "Gerardo Martino", "Gregg Berhalter", "John Herdman"]
-}
-
-teams_df = pd.DataFrame(teams_data)
-
-def show_teams():
-    st.header("Equipos y Jugadores Destacados")
-    st.dataframe(teams_df)
-
-# No olvides actualizar la función `show_teams` en la estructura principal
-
-# Datos de partidos (puede ser un archivo CSV)
-fixture_data = {
-    "Fecha": ["2024-06-10", "2024-06-11", "2024-06-12"],
-    "Partido": ["Argentina vs Brasil", "Uruguay vs Colombia", "México vs Estados Unidos"],
-    "Resultado": ["", "", ""]
-}
-
-fixture_df = pd.DataFrame(fixture_data)
-
-def show_fixture():
-    st.header("Fixture de Partidos")
-    st.dataframe(fixture_df)
-
-# No olvides actualizar la función `show_fixture` en la estructura principal
-
-def show_analysis():
-    st.header("Análisis y Predicciones")
     st.markdown("""
-    Basándonos en las tendencias históricas y la calidad de los jugadores, estas son nuestras predicciones sobre los posibles ganadores de la Copa América 2024:
-    
-    - **Argentina:** Liderados por Lionel Messi y con un equipo sólido, son los favoritos.
-    - **Brasil:** Con Neymar Jr. y Vinicius Junior, siempre son contendientes fuertes.
-    - **Uruguay:** Con Federico Valverde y Darwin Núñez, podrían sorprender.
-    - **Colombia:** Jugadores como James Rodríguez y Luis Díaz pueden marcar la diferencia.
-    - **México y Estados Unidos:** Podrían tener un buen desempeño, especialmente Estados Unidos por ser anfitrión.
-    - **Canadá:** Podría ser la sorpresa del torneo con jugadores emergentes como Alphonso Davies.
+    - **Harry Potter:** Seguirá luchando por la justicia y la igualdad en el mundo mágico.
+    - **Hermione Granger:** Posiblemente se convierta en Ministra de Magia, liderando reformas importantes.
+    - **Ron Weasley:** Con su habilidad táctica, podría abrir su propia tienda de artículos mágicos exitosamente.
+    - **Neville Longbottom:** Continuará su carrera en la enseñanza, inspirando a nuevas generaciones de magos y brujas.
+    - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
     """)
 
-# No olvides actualizar la función `show_analysis` en la estructura principal
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
-elif page == "Equipos y Jugadores":
-    show_teams()
-elif page == "Fixture de Partidos":
-    show_fixture()
-elif page == "Resultados":
-    show_results()
-elif page == "Análisis y Predicciones":
-    show_analysis()
+elif page == "Casas de Hogwarts":
+    show_houses()
+elif page == "Personajes Destacados":
+    show_characters()
+elif page == "Eventos Importantes":
+    show_events()
+elif page == "Predicciones Futuras":
+    show_predictions()
