@@ -45,7 +45,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras"]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Predicciones Futuras", "Encuesta de Popularidad"]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -91,11 +91,20 @@ def show_characters():
             "Leal amigo de Harry, siempre dispuesto a ayudar.",
             "Director de Hogwarts, uno de los magos más poderosos.",
             "Profesor de Pociones, conocido por su complejidad moral."
+        ],
+       "Imagen": [
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/122be6ec-0db1-4080-bb35-c6ec011bf9d4/Default_Create_an_image_of_Harry_Potter_the_iconic_young_wizar_2.jpg",
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/ef847676-9c6b-428a-b9d6-677511a6f15d/Default_Create_an_image_of_Hermione_Granger_the_brilliant_youn_1.jpg",
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/163c7e3d-1162-419d-b969-de7648ca586f/Default_Create_an_image_of_Ron_Weasley_the_loyal_and_brave_you_0.jpg",
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/bac0255b-3bfc-4054-bcb4-d34bc372099e/Default_Create_an_image_of_Albus_Dumbledore_the_wise_and_vener_2.jpg",
+            "https://cdn.leonardo.ai/users/24acd355-eb8c-4f53-9ed7-2f62a1535ea1/generations/fa2518ba-7da9-4006-811a-71dbce3971a2/Default_Create_an_image_of_Severus_Snape_the_enigmatic_and_com_3.jpg"
         ]
     }
 
-    characters_df = pd.DataFrame(characters_data)
-    st.dataframe(characters_df)
+    for i in range(len(characters_data["Personaje"])):
+        st.subheader(characters_data["Personaje"][i])
+        st.image(characters_data["Imagen"][i], width=150)
+        st.markdown(characters_data["Descripción"][i])
 
 # Función para mostrar eventos importantes
 def show_events():
@@ -131,6 +140,25 @@ def show_predictions():
     - **Draco Malfoy:** Trabajará para cambiar la percepción pública de su familia, contribuyendo positivamente a la sociedad mágica.
     """)
 
+# Función para mostrar la encuesta de popularidad
+def show_poll():
+    st.header("Encuesta de Popularidad")
+    st.markdown("""
+    ¡Vota por tu personaje favorito de Harry Potter!
+    """)
+    
+    characters = ["Harry Potter", "Hermione Granger", "Ron Weasley", "Albus Dumbledore", "Severus Snape"]
+    votes = {char: 0 for char in characters}
+    
+    selected_character = st.selectbox("Selecciona tu personaje favorito:", characters)
+    if st.button("Votar"):
+        votes[selected_character] += 1
+        st.success(f"¡Has votado por {selected_character}!")
+    
+    st.write("Resultados de la Encuesta:")
+    for character, count in votes.items():
+        st.write(f"{character}: {count} votos")
+
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -142,3 +170,5 @@ elif page == "Eventos Importantes":
     show_events()
 elif page == "Predicciones Futuras":
     show_predictions()
+elif page == "Encuesta de Popularidad":
+    show_poll()
