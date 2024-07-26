@@ -336,31 +336,6 @@ def show_name_generator():
         name = generate_magic_name()
         st.write(f"**Nombre Mágico:** {name}")
         
-# def consulta_dumbledore(consulta):
-#     """
-#     Realiza una consulta al modelo generativo para obtener una respuesta en el estilo de Albus Dumbledore.
-
-#     :param consulta: Pregunta que se desea hacer a Dumbledore.
-#     :return: Respuesta generada por el modelo.
-#     """
-#     prompt = f"{contexto}\n\nConsulta: {consulta}"
-#     respuesta_IA = model.generate_content(prompt)
-#     return respuesta_IA.text
-
-# # Espacio de preguntas del usuario
-# st.write("Puedes hacer tus consultas sobre el mundo de Harry Potter a continuación. Albus Dumbledore, el director de Hogwarts, te responderá con sabiduría y conocimiento sobre el universo mágico.")
-
-# consulta = st.text_area("Ingresa tu consulta:")
-
-# # Botón para enviar la consulta
-# if st.button("Consultar"):
-#     if consulta:
-#         respuesta = consulta_dumbledore(consulta)
-#         st.markdown("***Respuesta de Albus Dumbledore:***")
-#         st.write(respuesta)
-#     else:
-#         st.write("Por favor, ingresa una consulta.")
-
 
 
 # Función para mostrar la página de consulta con Dumbledore
@@ -383,6 +358,8 @@ def show_dumbledore():
             respuesta_IA = model.generate(prompt=prompt)
             st.markdown("***Respuesta de Albus Dumbledore:***")
             st.write(respuesta_IA)
+            return respuesta_IA.text
+
         else:
             st.write("Por favor, ingresa una consulta.")
 
