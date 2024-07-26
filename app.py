@@ -58,7 +58,7 @@ Bienvenido al mundo mágico de Harry Potter. Explora las casas de Hogwarts, desc
 
 # Barra lateral de navegación
 st.sidebar.title("Navegación")
-pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos","Descubre tu Casa" ]
+pages = ["Inicio", "Casas de Hogwarts", "Personajes Destacados", "Eventos Importantes", "Encuesta de Popularidad", "Trivia de Harry Potter","Generador de Hechizos Aleatorios", "Generador de Nombres Mágicos" ]
 page = st.sidebar.selectbox("Selecciona una página:", pages)
 
 # Función para mostrar la página de inicio
@@ -88,6 +88,23 @@ def show_houses():
 
     houses_df = pd.DataFrame(houses_data)
     st.dataframe(houses_df)
+
+    st.markdown("### Descubre tu Casa de Hogwarts")
+    if st.button("Descubrir mi Casa"):
+        # Definir casas con sus características
+        houses = {
+            "Gryffindor": "Valentía, coraje, determinación",
+            "Slytherin": "Astucia, ambición, liderazgo",
+            "Ravenclaw": "Inteligencia, creatividad, sabiduría",
+            "Hufflepuff": "Lealtad, trabajo duro, paciencia"
+        }
+
+        # Seleccionar una casa aleatoria
+        house = random.choice(list(houses.keys()))
+        characteristics = houses[house]
+
+        st.write(f"**Casa Seleccionada:** {house}")
+        st.write(f"**Características:** {characteristics}")
 
 # Función para mostrar personajes destacados
 def show_characters():
@@ -236,25 +253,6 @@ def show_magic_name_generator():
 
 
 
-
-def get_houses():
-    url = "https://potterhead-api.vercel.app/api/houses"
-    response = requests.get(url)
-    return response.json()
-
-def show_house_discovery():
-    st.header("Descubre tu Casa de Hogwarts")
-    st.markdown("""
-    Descubre a qué casa de Hogwarts perteneces con la ayuda de la magia de la API Potterhead.
-    """)
-
-    if st.button("Descubrir mi Casa"):
-        houses = get_houses()
-        # Seleccionar aleatoriamente una casa
-        selected_house = random.choice(houses)
-        st.write(f"¡Perteneces a la casa de **{selected_house}**!")
-
-
 # Mostrar la página seleccionada
 if page == "Inicio":
     show_home()
@@ -272,5 +270,4 @@ elif page == "Generador de Hechizos Aleatorios":
     show_spell_generator()
 elif page == "Generador de Nombres Mágicos":
     show_magic_name_generator()
-elif page == "Descubre tu Casa":
-    show_house_discovery()
+
