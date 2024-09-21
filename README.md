@@ -1,7 +1,5 @@
 # 🧙‍♂️ Mundo Mágico de Harry Potter 🏰
 
-![Hogwarts]([https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ](https://ideogram.ai/assets/progressive-image/balanced/response/2qJBAVvSSue0LdWuWyswdA))
-
 ## 📜 Descripción
 
 Bienvenido al repositorio de "Mundo Mágico de Harry Potter", una aplicación web interactiva desarrollada como proyecto final para el curso de **Prompt Engineering para Programadores** de Coderhouse. Esta aplicación fusiona la magia del universo de Harry Potter con las técnicas avanzadas de ingeniería de prompts y procesamiento de lenguaje natural.
