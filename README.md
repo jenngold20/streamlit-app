@@ -1,6 +1,6 @@
 # 🧙‍♂️ Mundo Mágico de Harry Potter 🏰
 
-![Hogwarts](https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ)
+![Hogwarts]([https://ideogram.ai/assets/image/lossless/response/TKf9Xk7PRPq2egXBavxMRQ](https://ideogram.ai/assets/progressive-image/balanced/response/2qJBAVvSSue0LdWuWyswdA))
 
 ## 📜 Descripción
 
